@@ -1,0 +1,77 @@
+{
+  "worlds": [
+    {
+      "id": "world_alphabet",
+      "name": "كوكب الحروف",
+      "description": "رحلة الحروف العربية وأصواتها",
+      "backgroundColor": "#E3F2FD",
+      "iconUrl": "planet_alphabet",
+      "order": 1,
+      "packageId": "com.judoor.content.alphabet_world"
+    },
+    {
+      "id": "world_numbers",
+      "name": "كوكب الأرقام",
+      "description": "مغامرات في عالم الحساب",
+      "backgroundColor": "#FFF3E0",
+      "iconUrl": "planet_numbers",
+      "order": 2,
+      "packageId": "com.judoor.content.math_world"
+    }
+  ],
+
+  "domains": [
+    {
+      "id": "linguistic",
+      "name": "مسار اللغة والقراءة",
+      "icon": "MenuBook",
+      "color": "#1E88E5",
+      "description": "التحدث، الاستماع، القراءة، الكتابة"
+    },
+    {
+      "id": "logical",
+      "name": "مسار الرياضيات والمنطق",
+      "icon": "Calculate",
+      "color": "#F57C00",
+      "description": "الأعداد، العمليات، الأشكال، المنطق"
+    },
+    {
+      "id": "stem",
+      "name": "مسار العلوم والاكتشاف",
+      "icon": "Science",
+      "color": "#E53935",
+      "description": "الطبيعة، التجارب، التفكير الحاسوبي"
+    },
+    {
+      "id": "social",
+      "name": "مسار المهارات الاجتماعية والعاطفية",
+      "icon": "Favorite",
+      "color": "#EC407A",
+      "description": "المشاعر، التواصل، التعاطف"
+    },
+    {
+      "id": "creative",
+      "name": "مسار الإبداع والفنون",
+      "icon": "Palette",
+      "color": "#7E57C2",
+      "description": "الموسيقى، الرسم، الحكي"
+    },
+    {
+      "id": "motor_health",
+      "name": "مسار النمو الحركي والصحي",
+      "icon": "FitnessCenter",
+      "color": "#66BB6A",
+      "description": "التنسيق، العادات الصحية"
+    }
+  ],
+
+  "units": [
+    {
+      "id": "unit_alphabet_1",
+      "worldId": "world_alphabet",
+      "domainId": "linguistic",
+      "title": "أصدقاء الحروف (أ - خ)",
+      "order": 1
+    }
+  ]
+}

@@ -1,0 +1,1240 @@
+{
+  "version": "1.0",
+  "generatedAt": "2024-01-01T10:00:00Z",
+  "dataSources": {
+    "courses": "مدمج من النسختين 1.0 و 1.1",
+    "modules": "منظم حسب البحث العلمي (A-J)",
+    "lessons": "دروس عملية مع أنشطة تطبيقية",
+    "badges": "شارات تحفيزية متدرجة",
+    "tips": "نصائح سياقية حسب الوقت والنشاط",
+    "recommendations": "قواعد التوصيات الشخصية"
+  },
+
+  "courses": [
+    {
+      "id": "A_ResponsiveCare_Attachment",
+      "title": "الرعاية المتجاوبة والتعلّق الآمن",
+      "description": "مواد مستندة إلى الأدلة لتمكين الأمهات من الاستجابة الحساسة لإشارات الطفل وبناء تعلق آمن.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "0-3 سنوات",
+      "difficulty": "مبتدئ",
+      "estimatedDuration": "3 أسابيع",
+      "researchCode": "A",
+      "isMandatory": true,
+      "icon": "responsiveness",
+      "childAgeRange": "0-3",
+      "prerequisites": [],
+      "completionBadgeId": "badge_care_master",
+      "modules": ["A1_Basics", "A2_AttachmentRoutines"],
+      "totalLessons": 3,
+      "orderIndex": 1,
+      "isActive": true
+    },
+    {
+      "id": "B_Language_EarlyLearning",
+      "title": "التحفيز اللغوي والتعلّم المبكّر",
+      "description": "استراتيجيات مجرّبة لتعزيز المفردات واللغة من خلال الحوار والقراءة المشتركة.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "0-5 سنوات",
+      "difficulty": "مبتدئ",
+      "estimatedDuration": "4 أسابيع",
+      "researchCode": "B",
+      "isMandatory": true,
+      "icon": "language",
+      "childAgeRange": "0-5",
+      "prerequisites": [],
+      "completionBadgeId": "badge_language_expert",
+      "modules": ["B1_ConversationalTurns", "B2_SharedReading"],
+      "totalLessons": 3,
+      "orderIndex": 2,
+      "isActive": true
+    },
+    {
+      "id": "C_Nutrition_Feeding",
+      "title": "التغذية والرضاعة والتغذية التكميلية",
+      "description": "توجيهات عملية للرضاعة والتغذية المتجاوبة والتنوع الغذائي وفق توصيات WHO.",
+      "targetAudience": "الأمهات",
+      "ageRange": "0-2 سنوات",
+      "difficulty": "مبتدئ",
+      "estimatedDuration": "2 أسابيع",
+      "researchCode": "C",
+      "isMandatory": true,
+      "icon": "nutrition",
+      "childAgeRange": "0-2",
+      "prerequisites": [],
+      "completionBadgeId": "badge_nutrition_expert",
+      "modules": ["C1_Breastfeeding", "C2_ComplementaryFeeding"],
+      "totalLessons": 2,
+      "orderIndex": 3,
+      "isActive": true
+    },
+    {
+      "id": "D_Health_Sleep_Physical",
+      "title": "الصحة الوقائية، النوم، والنمو الحركي",
+      "description": "أساسيات الصحة الوقائية، جداول النوم الروتينية، ونصائح لتنمية الحركة.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "0-5 سنوات",
+      "difficulty": "مبتدئ",
+      "estimatedDuration": "2 أسابيع",
+      "researchCode": "D",
+      "isMandatory": true,
+      "icon": "health",
+      "childAgeRange": "0-5",
+      "prerequisites": [],
+      "completionBadgeId": "badge_health_guardian",
+      "modules": ["D1_PreventiveHealth", "D2_SleepAndMotor"],
+      "totalLessons": 2,
+      "orderIndex": 4,
+      "isActive": true
+    },
+    {
+      "id": "E_SocioEmotional_PositiveDiscipline",
+      "title": "التنشئة الاجتماعية-العاطفية والانضباط الإيجابي",
+      "description": "مهارات عملية لدعم النمو العاطفي وتطبيق أساليب انضباط إيجابي.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "1-5 سنوات",
+      "difficulty": "متوسط",
+      "estimatedDuration": "3 أسابيع",
+      "researchCode": "E",
+      "isMandatory": false,
+      "icon": "emotions",
+      "childAgeRange": "1-5",
+      "prerequisites": ["A_ResponsiveCare_Attachment"],
+      "completionBadgeId": "badge_emotional_guide",
+      "modules": ["E1_EmotionalSkills", "E2_Discipline"],
+      "totalLessons": 2,
+      "orderIndex": 5,
+      "isActive": true
+    },
+    {
+      "id": "F_MaternalMentalHealth_Support",
+      "title": "الرعاية النفسية للأم والدعم الأسري",
+      "description": "مواد للتعرّف على أعراض الضيق النفسي لدى الأم وسبل الدعم.",
+      "targetAudience": "الوالدات",
+      "ageRange": "الوالدات",
+      "difficulty": "متوسط",
+      "estimatedDuration": "2 أسابيع",
+      "researchCode": "F",
+      "isMandatory": false,
+      "icon": "mental_health",
+      "childAgeRange": null,
+      "prerequisites": [],
+      "completionBadgeId": "badge_self_care",
+      "modules": ["F1_RecognizeAndSeek", "F2_SelfCare"],
+      "totalLessons": 2,
+      "orderIndex": 6,
+      "isActive": true
+    },
+    {
+      "id": "G_GrowthMonitoring_Screening",
+      "title": "رصد النمو والكشف المبكر عن تأخر النمو",
+      "description": "تدريب عملي على أدوات رصد أبسط مثل ASQ/CREDI وإجراءات الإحالة.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "0-5 سنوات",
+      "difficulty": "متوسط",
+      "estimatedDuration": "2 أسابيع",
+      "researchCode": "G",
+      "isMandatory": false,
+      "icon": "growth",
+      "childAgeRange": "0-5",
+      "prerequisites": ["D_Health_Sleep_Physical"],
+      "completionBadgeId": "badge_growth_monitor",
+      "modules": ["G1_ScreeningTools"],
+      "totalLessons": 1,
+      "orderIndex": 7,
+      "isActive": true
+    },
+    {
+      "id": "H_Safety_HomeFirstAid",
+      "title": "السلامة المنزلية والوقاية من المخاطر",
+      "description": "قواعد أمان عملية، إسعافات أولية أساسية وخطط طوارئ منزلية.",
+      "targetAudience": "الأسرة",
+      "ageRange": "الأسرة",
+      "difficulty": "متوسط",
+      "estimatedDuration": "2 أسابيع",
+      "researchCode": "H",
+      "isMandatory": false,
+      "icon": "safety",
+      "childAgeRange": "0-5",
+      "prerequisites": [],
+      "completionBadgeId": "badge_safety_expert",
+      "modules": ["H1_HomeSafety", "H2_FirstAid"],
+      "totalLessons": 2,
+      "orderIndex": 8,
+      "isActive": true
+    },
+    {
+      "id": "I_Inclusion_SpecialNeeds",
+      "title": "الإدماج ودعم الأطفال ذوي الإعاقات أو الاحتياجات الخاصة",
+      "description": "توجيهات مبسطة للتعرّف على الاحتياجات الخاصة والتكييف المنزلي والإحالة.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "0-5 سنوات",
+      "difficulty": "متقدم",
+      "estimatedDuration": "3 أسابيع",
+      "researchCode": "I",
+      "isMandatory": false,
+      "icon": "inclusion",
+      "childAgeRange": "0-5",
+      "prerequisites": ["G_GrowthMonitoring_Screening"],
+      "completionBadgeId": "badge_inclusion_champion",
+      "modules": ["I1_EarlyIntervention"],
+      "totalLessons": 1,
+      "orderIndex": 9,
+      "isActive": true
+    },
+    {
+      "id": "J_ScreenUse_Tech",
+      "title": "الاستخدام الآمن والمفيد للتكنولوجيا والوسائط",
+      "description": "إرشادات حول وقت الشاشة، اختيار المحتوى المُناسب وكيفية المشاركة الأبوية.",
+      "targetAudience": "الأمهات ومقدمو الرعاية",
+      "ageRange": "0-5 سنوات",
+      "difficulty": "مبتدئ",
+      "estimatedDuration": "1 أسبوع",
+      "researchCode": "J",
+      "isMandatory": false,
+      "icon": "technology",
+      "childAgeRange": "0-5",
+      "prerequisites": [],
+      "completionBadgeId": "badge_tech_wise",
+      "modules": ["J1_ScreenGuidance"],
+      "totalLessons": 1,
+      "orderIndex": 10,
+      "isActive": true
+    }
+  ],
+
+ "modules": [
+    {
+      "id": "A1_Basics",
+      "courseId": "A_ResponsiveCare_Attachment",
+      "title": "مفهوم الرعاية المتجاوبة",
+      "description": "أساسيات الاستجابة لإشارات الطفل وفهم الاحتياجات",
+      "learningObjectives": [
+        "تمييز إشارات الطفل",
+        "تطبيق استجابات حساسة وفورية",
+        "قياس التفاعل اليومي"
+      ],
+      "scientificBasis": "WHO Nurturing Care Framework; Lancet ECD",
+      "completionCriteria": "complete_at_least_2_lessons",
+      "estimatedDurationMinutes": 120,
+      "orderIndex": 1
+    },
+    {
+      "id": "A2_AttachmentRoutines",
+      "courseId": "A_ResponsiveCare_Attachment",
+      "title": "بناء التعلّق الآمن",
+      "description": "روتينات لتعزيز الشعور بالأمان والثقة",
+      "learningObjectives": [
+        "روتينات التقارب",
+        "استجابات في الغضب أو الخوف"
+      ],
+      "scientificBasis": "Attachment Theory (Bowlby)",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 90,
+      "orderIndex": 2
+    },
+    {
+      "id": "B1_ConversationalTurns",
+      "courseId": "B_Language_EarlyLearning",
+      "title": "التفاعل والحوار اليومي",
+      "description": "تقنيات لزيادة التفاعل اللغوي مع الطفل",
+      "learningObjectives": [
+        "زيادة محادثات 'turns'",
+        "جودة اللغة لا الكم"
+      ],
+      "scientificBasis": "Dialogic reading; conversational turns research",
+      "completionCriteria": "complete_at_least_2_lessons",
+      "estimatedDurationMinutes": 150,
+      "orderIndex": 1
+    },
+    {
+      "id": "B2_SharedReading",
+      "courseId": "B_Language_EarlyLearning",
+      "title": "القراءة المشتركة (Dialogic Reading)",
+      "description": "أساليب القراءة التفاعلية لتنمية اللغة",
+      "learningObjectives": [
+        "أساليب القراءة الحوارية",
+        "أسئلة مفتوحة"
+      ],
+      "scientificBasis": "Dialogic reading meta-analyses",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 120,
+      "orderIndex": 2
+    },
+    {
+      "id": "C1_Breastfeeding",
+      "courseId": "C_Nutrition_Feeding",
+      "title": "الرضاعة الطبيعية",
+      "description": "أساسيات الرضاعة الطبيعية وتحدياتها",
+      "learningObjectives": [
+        "منافع الرضاعة",
+        "حلول لمشكلات شائعة"
+      ],
+      "scientificBasis": "WHO infant feeding guidelines",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 90,
+      "orderIndex": 1
+    },
+    {
+      "id": "C2_ComplementaryFeeding",
+      "courseId": "C_Nutrition_Feeding",
+      "title": "التغذية التكميلية",
+      "description": "بدء الأطعمة الصلبة والتغذية المتوازنة",
+      "learningObjectives": [
+        "متى نبدأ",
+        "تنويع الغذاء",
+        "التغذية المتجاوبة"
+      ],
+      "scientificBasis": "WHO complementary feeding guidelines",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 120,
+      "orderIndex": 2
+    },
+    {
+      "id": "D1_PreventiveHealth",
+      "courseId": "D_Health_Sleep_Physical",
+      "title": "الرعاية الصحية والمتابعة",
+      "description": "أساسيات الصحة الوقائية والمتابعة الدورية",
+      "learningObjectives": [
+        "جداول التطعيم",
+        "مؤشرات النمو",
+        "متى نراجع الطبيب"
+      ],
+      "scientificBasis": "WHO immunization schedules",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 90,
+      "orderIndex": 1
+    },
+    {
+      "id": "D2_SleepAndMotor",
+      "courseId": "D_Health_Sleep_Physical",
+      "title": "النوم والنمو الحركي",
+      "description": "روتينات النوم وتنمية المهارات الحركية",
+      "learningObjectives": [
+        "بناء روتين النوم",
+        "تشجيع الحركات المناسبة للمرحلة"
+      ],
+      "scientificBasis": "Sleep hygiene for infants; WHO recommendations",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 120,
+      "orderIndex": 2
+    },
+    {
+      "id": "E1_EmotionalSkills",
+      "courseId": "E_SocioEmotional_PositiveDiscipline",
+      "title": "المهارات العاطفية",
+      "description": "تنمية الذكاء العاطفي والتعامل مع المشاعر",
+      "learningObjectives": [
+        "فهم مشاعر الطفل",
+        "تعليم ضبط النفس عبر اللعب"
+      ],
+      "scientificBasis": "Developmental psychology; emotion regulation research",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 150,
+      "orderIndex": 1
+    },
+    {
+      "id": "E2_Discipline",
+      "courseId": "E_SocioEmotional_PositiveDiscipline",
+      "title": "الانضباط الإيجابي",
+      "description": "بدائل العقاب وبناء السلوك الإيجابي",
+      "learningObjectives": [
+        "بدائل للعقاب",
+        "تعزيز السلوك الإيجابي"
+      ],
+      "scientificBasis": "Parenting interventions evidence",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 180,
+      "orderIndex": 2
+    },
+    {
+      "id": "F1_RecognizeAndSeek",
+      "courseId": "F_MaternalMentalHealth_Support",
+      "title": "التعرف وطلب المساعدة",
+      "description": "التعرف على علامات الضيق النفسي وطلب الدعم",
+      "learningObjectives": [
+        "التعرّف على الاكتئاب بعد الولادة",
+        "متى وكيف تطلبين مساعدة"
+      ],
+      "scientificBasis": "Postpartum depression screening guidelines",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 90,
+      "orderIndex": 1
+    },
+    {
+      "id": "F2_SelfCare",
+      "courseId": "F_MaternalMentalHealth_Support",
+      "title": "ممارسات العناية الذاتية",
+      "description": "استراتيجيات العناية بالنفس وبناء شبكة دعم",
+      "learningObjectives": [
+        "استراتيجيات بسيطة للعناية الذاتية",
+        "بناء شبكة دعم"
+      ],
+      "scientificBasis": "Self-care interventions for mothers",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 120,
+      "orderIndex": 2
+    },
+    {
+      "id": "G1_ScreeningTools",
+      "courseId": "G_GrowthMonitoring_Screening",
+      "title": "أدوات رصد مبسطة",
+      "description": "استخدام أدوات الرصد المنزلية والكشف المبكر",
+      "learningObjectives": [
+        "استخدام ASQ/CREDI",
+        "تفسير النتائج",
+        "خطوات الإحالة"
+      ],
+      "scientificBasis": "Early intervention and screening evidence",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 180,
+      "orderIndex": 1
+    },
+    {
+      "id": "H1_HomeSafety",
+      "courseId": "H_Safety_HomeFirstAid",
+      "title": "الوقاية المنزلية",
+      "description": "تأمين البيئة المنزلية والوقاية من المخاطر",
+      "learningObjectives": [
+        "تأمين المنزل",
+        "الحد من مخاطر السقوط والحروق والتسمم"
+      ],
+      "scientificBasis": "Home safety guidelines (AAP)",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 120,
+      "orderIndex": 1
+    },
+    {
+      "id": "H2_FirstAid",
+      "courseId": "H_Safety_HomeFirstAid",
+      "title": "الإسعافات الأولية الأساسية",
+      "description": "التعامل مع الإصابات والحوادث الشائعة",
+      "learningObjectives": [
+        "معرفة خطوات إنقاذ بسيطة",
+        "التصرف في حالات الحوادث الشائعة"
+      ],
+      "scientificBasis": "Basic first aid guidelines",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 150,
+      "orderIndex": 2
+    },
+    {
+      "id": "I1_EarlyIntervention",
+      "courseId": "I_Inclusion_SpecialNeeds",
+      "title": "التعرّف المبكر والإحالة",
+      "description": "الكشف عن الاحتياجات الخاصة وسبل الدعم",
+      "learningObjectives": [
+        "مؤشرات مبكرة",
+        "خطوات الدعم المنزلي",
+        "محركات الإحالة"
+      ],
+      "scientificBasis": "Early intervention and inclusion evidence",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 180,
+      "orderIndex": 1
+    },
+    {
+      "id": "J1_ScreenGuidance",
+      "courseId": "J_ScreenUse_Tech",
+      "title": "إرشادات زمن الشاشة والمحتوى",
+      "description": "الاستخدام المسؤول للشاشات والتكنولوجيا",
+      "learningObjectives": [
+        "حدود زمن الشاشة حسب العمر",
+        "مشاركة الأهل في المشاهدة",
+        "اختيار محتوى تعليمي مناسب"
+      ],
+      "scientificBasis": "WHO / AAP screen time guidance",
+      "completionCriteria": "complete_all_lessons",
+      "estimatedDurationMinutes": 90,
+      "orderIndex": 1
+    }
+  ],
+
+  "lessonsIndex": [
+    {
+      "id": "A1_L1_Signals",
+      "moduleId": "A1_Basics",
+      "courseId": "A_ResponsiveCare_Attachment",
+      "title": "كيف تعرفين إشارات طفلك؟",
+      "summary": "أنواع الإشارات الواضحة والغامضة وكيف تفسرينها.",
+      "estimatedMinutes": 15,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": "ACT_EMOTION_001",
+      "prerequisites": [],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "A1_L2_ResponsiveDialogue",
+      "moduleId": "A1_Basics",
+      "courseId": "A_ResponsiveCare_Attachment",
+      "title": "الحوار الاستجابي: الحديث الذي يُنمّي",
+      "summary": "كيفية تحويل الاستجابات اليومية إلى فرص تعلم لغوي وعاطفي.",
+      "estimatedMinutes": 10,
+      "completionRule": "view_and_try_activity",
+      "relatedChildActivity": "ACT_LANGUAGE_001",
+      "prerequisites": ["A1_L1_Signals"],
+      "difficulty": "easy",
+      "orderIndex": 2
+    },
+    {
+      "id": "A2_L1_Routines",
+      "moduleId": "A2_AttachmentRoutines",
+      "courseId": "A_ResponsiveCare_Attachment",
+      "title": "روتينات يومية لتعزيز الأمان",
+      "summary": "تحويل اللحظات الروتينية إلى فرص تواصل حاني.",
+      "estimatedMinutes": 20,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": ["A1_L1_Signals"],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "B1_L1_TalkAndName",
+      "moduleId": "B1_ConversationalTurns",
+      "courseId": "B_Language_EarlyLearning",
+      "title": "التسمية والحديث أثناء الأنشطة",
+      "summary": "كيفية دمج المفردات أثناء الرعاية اليومية.",
+      "estimatedMinutes": 10,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": "ACT_LANGUAGE_002",
+      "prerequisites": [],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "B1_L2_Expanding",
+      "moduleId": "B1_ConversationalTurns",
+      "courseId": "B_Language_EarlyLearning",
+      "title": "التوسيع وإعادة الصياغة",
+      "summary": "تقنية توسيع جمل الطفل لتعلم تراكيب جديدة.",
+      "estimatedMinutes": 15,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": "ACT_LANGUAGE_003",
+      "prerequisites": ["B1_L1_TalkAndName"],
+      "difficulty": "medium",
+      "orderIndex": 2
+    },
+    {
+      "id": "B2_L1_WhyRead",
+      "moduleId": "B2_SharedReading",
+      "courseId": "B_Language_EarlyLearning",
+      "title": "لماذا القراءة المشتركة مهمة؟",
+      "summary": "أدلة تأثير القراءة على المفردات والخيال.",
+      "estimatedMinutes": 15,
+      "completionRule": "view_and_do_activity",
+      "relatedChildActivity": "ACT_READING_001",
+      "prerequisites": ["B1_L1_TalkAndName"],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "C1_L1_Benefits",
+      "moduleId": "C1_Breastfeeding",
+      "courseId": "C_Nutrition_Feeding",
+      "title": "فوائد الرضاعة وكيفية التعامل مع الصعوبات",
+      "summary": "الرضاعة كمصدر غذاء ودعم للعلاقة، ومشكلات شائعة وحلول.",
+      "estimatedMinutes": 20,
+      "completionRule": "view_and_try_activity",
+      "relatedChildActivity": null,
+      "prerequisites": [],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "C2_L1_StartSolids",
+      "moduleId": "C2_ComplementaryFeeding",
+      "courseId": "C_Nutrition_Feeding",
+      "title": "متى وكيف نبدأ الأطعمة التكميلية؟",
+      "summary": "إرشادات عملية للبدء واختيار أطعمة مغذية مناسبة.",
+      "estimatedMinutes": 30,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": ["C1_L1_Benefits"],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "D1_L1_Immunizations",
+      "moduleId": "D1_PreventiveHealth",
+      "courseId": "D_Health_Sleep_Physical",
+      "title": "التطعيمات والمتابعة الصحية",
+      "summary": "جدول التطعيمات وأهمية المتابعة الدورية.",
+      "estimatedMinutes": 10,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": [],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "D2_L1_SleepRoutine",
+      "moduleId": "D2_SleepAndMotor",
+      "courseId": "D_Health_Sleep_Physical",
+      "title": "روتين نوم صحي",
+      "summary": "كيفية إنشاء روتين يساعد على نمط نوم منتظم وجودة أعلى.",
+      "estimatedMinutes": 20,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": [],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "E1_L1_Recognize",
+      "moduleId": "E1_EmotionalSkills",
+      "courseId": "E_SocioEmotional_PositiveDiscipline",
+      "title": "التعرّف على المشاعر الأساسية",
+      "summary": "كيفية قراءة مشاعر الطفل والاستجابة المناسبة.",
+      "estimatedMinutes": 15,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": "ACT_EMOTION_002",
+      "prerequisites": [],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "E2_L1_Boundaries",
+      "moduleId": "E2_Discipline",
+      "courseId": "E_SocioEmotional_PositiveDiscipline",
+      "title": "وضع حدود آمنة وواضحة",
+      "summary": "كيفية وضع قواعد منزلية ثابتة ومكافآت للسلوك الجيد.",
+      "estimatedMinutes": 30,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": ["E1_L1_Recognize"],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "F1_L1_PostnatalDepression",
+      "moduleId": "F1_RecognizeAndSeek",
+      "courseId": "F_MaternalMentalHealth_Support",
+      "title": "التعرّف على اكتئاب ما بعد الولادة",
+      "summary": "أعراض شائعة ومؤشرات إحالة للخدمات.",
+      "estimatedMinutes": 10,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": [],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "F2_L1_PracticalSelfCare",
+      "moduleId": "F2_SelfCare",
+      "courseId": "F_MaternalMentalHealth_Support",
+      "title": "استراتيجيات العناية بالذات العملية",
+      "summary": "خطوات يومية صغيرة لتحسين الصحة النفسية.",
+      "estimatedMinutes": 5,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": ["F1_L1_PostnatalDepression"],
+      "difficulty": "easy",
+      "orderIndex": 1
+    },
+    {
+      "id": "G1_L1_ASQIntro",
+      "moduleId": "G1_ScreeningTools",
+      "courseId": "G_GrowthMonitoring_Screening",
+      "title": "مقدمة عن أدوات الرصد (ASQ/CREDI)",
+      "summary": "ما هي الأدوات وكيف تستخدمها الأم في المنزل.",
+      "estimatedMinutes": 20,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": "ACT_ASSESSMENT_001",
+      "prerequisites": ["D1_L1_Immunizations"],
+      "difficulty": "hard",
+      "orderIndex": 1
+    },
+    {
+      "id": "H1_L1_PoisonPrevention",
+      "moduleId": "H1_HomeSafety",
+      "courseId": "H_Safety_HomeFirstAid",
+      "title": "منع التسمّم وتأمين الأدوية والمواد الكيميائية",
+      "summary": "نُهج بسيطة لحفظ المواد الخطرة وبناء بيئة آمنة.",
+      "estimatedMinutes": 15,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": [],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "H2_L1_BasicFirstAid",
+      "moduleId": "H2_FirstAid",
+      "courseId": "H_Safety_HomeFirstAid",
+      "title": "خطوات إسعاف بسيطة للإصابات الطفيفة",
+      "summary": "تنظيف الجروح، التعامل مع السقوط والندوب البسيطة.",
+      "estimatedMinutes": 20,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": ["H1_L1_PoisonPrevention"],
+      "difficulty": "medium",
+      "orderIndex": 1
+    },
+    {
+      "id": "I1_L1_EarlySigns",
+      "moduleId": "I1_EarlyIntervention",
+      "courseId": "I_Inclusion_SpecialNeeds",
+      "title": "مؤشرات مبكرة للاعاقات",
+      "summary": "عناصر سريعة قد تشير لوجود احتياجات خاصة.",
+      "estimatedMinutes": 20,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": "ACT_ASSESSMENT_002",
+      "prerequisites": ["G1_L1_ASQIntro"],
+      "difficulty": "hard",
+      "orderIndex": 1
+    },
+    {
+      "id": "J1_L1_ScreenLimits",
+      "moduleId": "J1_ScreenGuidance",
+      "courseId": "J_ScreenUse_Tech",
+      "title": "إرشادات زمن الشاشة حسب العمر",
+      "summary": "متى نستخدم الشاشات وكيف نحدّ من الضرر.",
+      "estimatedMinutes": 10,
+      "completionRule": "complete_activity",
+      "relatedChildActivity": null,
+      "prerequisites": [],
+      "difficulty": "easy",
+      "orderIndex": 1
+    }
+  ],
+
+ "badges": [
+    {
+      "id": "badge_first_lesson",
+      "title": "أول خطوة",
+      "description": "أكملت أول درس في أكاديمية الأمومة",
+      "icon": "first_step",
+      "category": "achievement",
+      "rarity": "common",
+      "requirements": {
+        "type": "lessons_completed",
+        "target": 1,
+        "courseId": null,
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 50,
+        "unlocksCourseId": null,
+        "specialTitle": null
+      },
+      "xpReward": 50,
+      "isSecret": false,
+      "unlockMessage": "مبروك! بدأت رحلة التعلم الأمومي",
+      "orderIndex": 1
+    },
+    {
+      "id": "badge_care_master",
+      "title": "خبيرة رعاية",
+      "description": "أكملت دورة الرعاية المتجاوبة والتعلق الآمن",
+      "icon": "care_expert",
+      "category": "care",
+      "rarity": "uncommon",
+      "requirements": {
+        "type": "course_completion",
+        "target": null,
+        "courseId": "A_ResponsiveCare_Attachment",
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 200,
+        "unlocksCourseId": "E_SocioEmotional_PositiveDiscipline",
+        "specialTitle": "خبيرة الرعاية"
+      },
+      "xpReward": 200,
+      "isSecret": false,
+      "unlockMessage": "أصبحت خبيرة في الرعاية المتجاوبة!",
+      "orderIndex": 2
+    },
+    {
+      "id": "badge_language_expert",
+      "title": "محفزة لغوية",
+      "description": "أكملت دورة التحفيز اللغوي والتعلم المبكر",
+      "icon": "language_expert",
+      "category": "language",
+      "rarity": "uncommon",
+      "requirements": {
+        "type": "course_completion",
+        "target": null,
+        "courseId": "B_Language_EarlyLearning",
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 200,
+        "unlocksCourseId": null,
+        "specialTitle": "المحفزة اللغوية"
+      },
+      "xpReward": 200,
+      "isSecret": false,
+      "unlockMessage": "مهاراتك اللغوية تساعد طفلك على التطور!",
+      "orderIndex": 3
+    },
+    {
+      "id": "badge_nutrition_expert",
+      "title": "خبيرة تغذية",
+      "description": "أكملت دورة التغذية والرضاعة",
+      "icon": "nutrition_expert",
+      "category": "health",
+      "rarity": "uncommon",
+      "requirements": {
+        "type": "course_completion",
+        "target": null,
+        "courseId": "C_Nutrition_Feeding",
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 200,
+        "unlocksCourseId": null,
+        "specialTitle": "خبيرة التغذية"
+      },
+      "xpReward": 200,
+      "isSecret": false,
+      "unlockMessage": "تعلمك يساعد في بناء أساس صحي لطفلك!",
+      "orderIndex": 4
+    },
+    {
+      "id": "badge_health_guardian",
+      "title": "حارسة الصحة",
+      "description": "أكملت دورة الصحة الوقائية والنوم",
+      "icon": "health_guardian",
+      "category": "health",
+      "rarity": "uncommon",
+      "requirements": {
+        "type": "course_completion",
+        "target": null,
+        "courseId": "D_Health_Sleep_Physical",
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 200,
+        "unlocksCourseId": null,
+        "specialTitle": "حارسة الصحة"
+      },
+      "xpReward": 200,
+      "isSecret": false,
+      "unlockMessage": "أنت تبني أساساً صحياً لمستقبل طفلك!",
+      "orderIndex": 5
+    },
+    {
+      "id": "badge_perfect_score",
+      "title": "متفوّقة",
+      "description": "حصلت على درجة كاملة في 5 دروس",
+      "icon": "perfect_score",
+      "category": "achievement",
+      "rarity": "rare",
+      "requirements": {
+        "type": "perfect_scores",
+        "target": 5,
+        "courseId": null,
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 500,
+        "unlocksCourseId": null,
+        "specialTitle": "المتفوّقة"
+      },
+      "xpReward": 500,
+      "isSecret": false,
+      "unlockMessage": "تميزك في التعلم يظهر في نتائجك!",
+      "orderIndex": 6
+    },
+    {
+      "id": "badge_week_streak",
+      "title": "متتالية أسبوعية",
+      "description": "تعلمت لمدة 7 أيام متتالية",
+      "icon": "streak_week",
+      "category": "consistency",
+      "rarity": "rare",
+      "requirements": {
+        "type": "streak",
+        "target": 7,
+        "courseId": null,
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 300,
+        "unlocksCourseId": null,
+        "specialTitle": "المتواصلة"
+      },
+      "xpReward": 300,
+      "isSecret": false,
+      "unlockMessage": "إصرارك على التعلم مذهل!",
+      "orderIndex": 7
+    },
+    {
+      "id": "badge_child_impact",
+      "title": "مؤثرة إيجابياً",
+      "description": "تحسن ملحوظ في مهارات طفلك بعد تعلمك",
+      "icon": "child_impact",
+      "category": "impact",
+      "rarity": "epic",
+      "requirements": {
+        "type": "child_impact",
+        "target": null,
+        "courseId": null,
+        "skillCategory": null,
+        "childImprovementThreshold": 0.3
+      },
+      "rewards": {
+        "xp": 1000,
+        "unlocksCourseId": null,
+        "specialTitle": "المؤثرة الإيجابية"
+      },
+      "xpReward": 1000,
+      "isSecret": true,
+      "unlockMessage": "تعلمك يحقق نتائج ملموسة في تطور طفلك!",
+      "orderIndex": 8
+    },
+    {
+      "id": "badge_all_courses",
+      "title": "أم خبيرة",
+      "description": "أكملت جميع الدورات الأساسية",
+      "icon": "expert_mother",
+      "category": "achievement",
+      "rarity": "legendary",
+      "requirements": {
+        "type": "courses_completed",
+        "target": 5,
+        "courseId": null,
+        "skillCategory": null,
+        "childImprovementThreshold": null
+      },
+      "rewards": {
+        "xp": 2000,
+        "unlocksCourseId": null,
+        "specialTitle": "الأم الخبيرة"
+      },
+      "xpReward": 2000,
+      "isSecret": false,
+      "unlockMessage": "لقد أصبحت مرجعاً في رعاية الأطفال!",
+      "orderIndex": 9
+    }
+  ],
+
+
+  "tips": [
+    {
+      "id": "tip_morning_001",
+      "title": "صباح الخير! 🌅",
+      "message": "الصباح وقت ممتاز للتعلم. جربي درساً قصيراً مع طفلك قبل بدء يومك.",
+      "contextType": "time_based",
+      "contextData": "{\"timeOfDay\": \"morning\"}",
+      "priority": 2,
+      "actionJson": "{\"label\": \"عرض الدروس الصباحية\", \"type\": \"navigate\", \"target\": \"morning_lessons\"}",
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": 10,
+      "minIntervalHours": 24,
+      "lessonId": null,
+      "activityId": null,
+      "isActive": true
+    },
+    {
+      "id": "tip_evening_001",
+      "title": "وقت النوم 🌙",
+      "message": "روتين نوم هادئ يساعد على نمو الدماغ. هل جربت روتين النوم الجديد من الدرس؟",
+      "contextType": "time_based",
+      "contextData": "{\"timeOfDay\": \"evening\"}",
+      "priority": 3,
+      "actionJson": "{\"label\": \"فتح درس روتين النوم\", \"type\": \"open_lesson\", \"target\": \"D2_L1_SleepRoutine\"}",
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": 5,
+      "minIntervalHours": 48,
+      "lessonId": "D2_L1_SleepRoutine",
+      "activityId": null,
+      "isActive": true
+    },
+    {
+      "id": "tip_child_language_001",
+      "title": "فرصة لغوية! 💬",
+      "message": "طفلك يلعب لعبة لغوية. استغلي الفرصة لتطبيق تقنيات الحوار من الدرس.",
+      "contextType": "activity_based",
+      "contextData": "{\"activityType\": \"language\"}",
+      "priority": 3,
+      "actionJson": "{\"label\": \"عرض تقنيات الحوار\", \"type\": \"open_lesson\", \"target\": \"B1_L1_TalkAndName\"}",
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": null,
+      "minIntervalHours": 6,
+      "lessonId": "B1_L1_TalkAndName",
+      "activityId": "ACT_LANGUAGE_001",
+      "isActive": true
+    },
+    {
+      "id": "tip_child_emotion_001",
+      "title": "قراءة المشاعر 😊",
+      "message": "لعبة المشاعر فرصة لتعليم الطفل التعبير عن مشاعره. جربي أسئلة 'كيف تشعر؟'",
+      "contextType": "activity_based",
+      "contextData": "{\"activityType\": \"emotion\"}",
+      "priority": 2,
+      "actionJson": "{\"label\": \"تعلم قراءة المشاعر\", \"type\": \"open_lesson\", \"target\": \"E1_L1_Recognize\"}",
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": null,
+      "minIntervalHours": 6,
+      "lessonId": "E1_L1_Recognize",
+      "activityId": "ACT_EMOTION_001",
+      "isActive": true
+    },
+    {
+      "id": "tip_first_lesson_001",
+      "title": "بدأت للتو؟ 🎉",
+      "message": "أول درس هو الأصعب. تذكري أن كل خبيرة كانت يوماً ما مبتدئة.",
+      "contextType": "progress_based",
+      "contextData": "{\"milestone\": \"first_lesson\"}",
+      "priority": 1,
+      "actionJson": null,
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": 1,
+      "minIntervalHours": 0,
+      "lessonId": null,
+      "activityId": null,
+      "isActive": true
+    },
+    {
+      "id": "tip_course_completion_001",
+      "title": "إنجاز رائع! 🏆",
+      "message": "أكملت دورة كاملة! هل تريدين معرفة تأثير تعلمك على تطور طفلك؟",
+      "contextType": "progress_based",
+      "contextData": "{\"milestone\": \"course_completion\"}",
+      "priority": 3,
+      "actionJson": "{\"label\": \"عرض تأثير التعلم\", \"type\": \"navigate\", \"target\": \"parent_impact\"}",
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": null,
+      "minIntervalHours": 0,
+      "lessonId": null,
+      "activityId": null,
+      "isActive": true
+    },
+    {
+      "id": "tip_streak_001",
+      "title": "متتالية نشطة! 🔥",
+      "message": "أنت تتعلمين لمدة 3 أيام متتالية. استمري في هذا الزخم!",
+      "contextType": "progress_based",
+      "contextData": "{\"milestone\": \"3_day_streak\"}",
+      "priority": 2,
+      "actionJson": null,
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": 1,
+      "minIntervalHours": 0,
+      "lessonId": null,
+      "activityId": null,
+      "isActive": true
+    },
+    {
+      "id": "tip_weekend_001",
+      "title": "عطلة نهاية الأسبوع 📚",
+      "message": "العطلة وقت ممتاز لمراجعة ما تعلمته خلال الأسبوع.",
+      "contextType": "time_based",
+      "contextData": "{\"timeOfDay\": \"weekend\"}",
+      "priority": 1,
+      "actionJson": "{\"label\": \"مراجعة الدروس\", \"type\": \"navigate\", \"target\": \"review_lessons\"}",
+      "validFrom": null,
+      "validTo": null,
+      "maxShows": null,
+      "minIntervalHours": 168,
+      "lessonId": null,
+      "activityId": null,
+      "isActive": true
+    }
+  ],
+
+
+
+  "recommendations": {
+    "rules": [
+      {
+        "id": "rule_beginner_path",
+        "name": "مسار المبتدئين",
+        "description": "مسار التعلم للمبتدئات يبدأ بالأساسيات الإلزامية",
+        "conditions": {
+          "parentLevel": "beginner",
+          "childAge": "0-3",
+          "completedLessons": 0,
+          "preferredTime": "any"
+        },
+        "recommendedCourses": [
+          "A_ResponsiveCare_Attachment",
+          "B_Language_EarlyLearning",
+          "C_Nutrition_Feeding"
+        ],
+        "priorityOrder": ["isMandatory", "childAgeMatch", "difficulty"],
+        "maxDailyLessons": 1,
+        "minIntervalDays": 1
+      },
+      {
+        "id": "rule_intermediate_path",
+        "name": "مسار المتوسطات",
+        "description": "مسار للواتي أكملن الأساسيات ويردن التوسع",
+        "conditions": {
+          "parentLevel": "intermediate",
+          "childAge": "1-5",
+          "completedLessons": 5,
+          "preferredTime": "any"
+        },
+        "recommendedCourses": [
+          "D_Health_Sleep_Physical",
+          "E_SocioEmotional_PositiveDiscipline",
+          "H_Safety_HomeFirstAid"
+        ],
+        "priorityOrder": ["childAgeMatch", "prerequisitesMet", "difficulty"],
+        "maxDailyLessons": 2,
+        "minIntervalDays": 1
+      },
+      {
+        "id": "rule_advanced_path",
+        "name": "مسار المتقدمات",
+        "description": "مسار للخبيرات الراغبات في التخصص",
+        "conditions": {
+          "parentLevel": "advanced",
+          "childAge": "2-5",
+          "completedLessons": 15,
+          "preferredTime": "any"
+        },
+        "recommendedCourses": [
+          "G_GrowthMonitoring_Screening",
+          "I_Inclusion_SpecialNeeds",
+          "F_MaternalMentalHealth_Support"
+        ],
+        "priorityOrder": ["specialization", "prerequisitesMet", "childAgeMatch"],
+        "maxDailyLessons": 3,
+        "minIntervalDays": 2
+      },
+      {
+        "id": "rule_child_needs_language",
+        "name": "دعم اللغة",
+        "description": "عندما يحتاج الطفل دعمًا لغوياً",
+        "conditions": {
+          "parentLevel": "any",
+          "childNeeds": ["language_delay"],
+          "completedCourses": [],
+          "preferredTime": "any"
+        },
+        "recommendedCourses": [
+          "B_Language_EarlyLearning"
+        ],
+        "priorityOrder": ["childNeedsMatch", "difficulty"],
+        "maxDailyLessons": 2,
+        "minIntervalDays": 1
+      },
+      {
+        "id": "rule_child_needs_emotions",
+        "name": "دعم المشاعر",
+        "description": "عندما يحتاج الطفل دعمًا عاطفياً",
+        "conditions": {
+          "parentLevel": "any",
+          "childNeeds": ["emotional_regulation"],
+          "completedCourses": [],
+          "preferredTime": "any"
+        },
+        "recommendedCourses": [
+          "E_SocioEmotional_PositiveDiscipline",
+          "A_ResponsiveCare_Attachment"
+        ],
+        "priorityOrder": ["childNeedsMatch", "prerequisitesMet"],
+        "maxDailyLessons": 2,
+        "minIntervalDays": 1
+      },
+      {
+        "id": "rule_busy_mother",
+        "name": "الأم المشغولة",
+        "description": "توصيات للأمهات ذوات الوقت المحدود",
+        "conditions": {
+          "parentLevel": "any",
+          "availableMinutes": 15,
+          "preferredTime": "short_sessions"
+        },
+        "recommendedCourses": [],
+        "recommendedLessons": [
+          "A1_L1_Signals",
+          "B1_L1_TalkAndName",
+          "D1_L1_Immunizations",
+          "F2_L1_PracticalSelfCare"
+        ],
+        "priorityOrder": ["duration", "isMandatory"],
+        "maxDailyLessons": 1,
+        "minIntervalDays": 1
+      },
+      {
+        "id": "rule_morning_learner",
+        "name": "المتعلمة الصباحية",
+        "description": "توصيات للتعلم في الصباح",
+        "conditions": {
+          "parentLevel": "any",
+          "preferredTime": "morning",
+          "availableMinutes": 30
+        },
+        "recommendedCourses": [],
+        "recommendedLessons": [
+          "A1_L2_ResponsiveDialogue",
+          "B1_L2_Expanding",
+          "D2_L1_SleepRoutine"
+        ],
+        "priorityOrder": ["timeOfDay", "energyLevel"],
+        "maxDailyLessons": 2,
+        "minIntervalDays": 1
+      },
+      {
+        "id": "rule_evening_learner",
+        "name": "المتعلمة المسائية",
+        "description": "توصيات للتعلم في المساء",
+        "conditions": {
+          "parentLevel": "any",
+          "preferredTime": "evening",
+          "availableMinutes": 20
+        },
+        "recommendedCourses": [],
+        "recommendedLessons": [
+          "E1_L1_Recognize",
+          "F2_L1_PracticalSelfCare",
+          "J1_L1_ScreenLimits"
+        ],
+        "priorityOrder": ["timeOfDay", "relaxation"],
+        "maxDailyLessons": 1,
+        "minIntervalDays": 1
+      }
+    ],
+    "factors": {
+      "childAgeMatch": {
+        "weight": 0.3,
+        "description": "مدى تطابق عمر الطفل مع نطاق عمر الدورة"
+      },
+      "prerequisitesMet": {
+        "weight": 0.25,
+        "description": "مدى استيفاء المتطلبات المسبقة"
+      },
+      "difficulty": {
+        "weight": 0.2,
+        "description": "ملاءمة مستوى الصعوبة لمستوى الأم"
+      },
+      "isMandatory": {
+        "weight": 0.15,
+        "description": "الأولوية للدورات الإلزامية"
+      },
+      "duration": {
+        "weight": 0.1,
+        "description": "ملاءمة مدة الدرس للوقت المتاح"
+      }
+    },
+    "scoring": {
+      "thresholds": {
+        "high": 0.8,
+        "medium": 0.6,
+        "low": 0.4
+      },
+      "fallbackRule": "rule_beginner_path"
+    }
+  }
+}

@@ -1,0 +1,1140 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مغامرة الأشكال والألوان - نشاط تفاعلي للأطفال</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --success-color: #95E1D3;
+            --background-color: #F7F9FC;
+            --text-color: #2C3E50;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --radius: 20px;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', 'Cairo', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            overflow: hidden;
+        }
+        
+        .app-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--background-color);
+        }
+        
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .app-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .star {
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.3;
+        }
+        
+        .star.earned {
+            filter: grayscale(0%);
+            opacity: 1;
+            animation: starPop 0.5s ease;
+        }
+        
+        @keyframes starPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+        
+        .start-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .start-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .start-description {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--text-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+        
+        .level-screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .level-screen.active {
+            display: flex;
+        }
+        
+        .level-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .level-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .level-instruction {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .game-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .shapes-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .shape-item {
+            width: 120px;
+            height: 120px;
+            cursor: grab;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        
+        .shape-item:active {
+            cursor: grabbing;
+        }
+        
+        .shape-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .shape-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .drop-zones {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .drop-zone {
+            width: 150px;
+            height: 150px;
+            border: 4px dashed #ccc;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .drop-zone.drag-over {
+            border-color: var(--secondary-color);
+            background: rgba(78, 205, 196, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .drop-zone-label {
+            font-size: 1.2rem;
+            color: #999;
+            text-align: center;
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+        }
+        
+        .drop-zone.filled {
+            border-color: var(--success-color);
+            background: rgba(149, 225, 211, 0.2);
+        }
+        
+        .color-boxes {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .color-box {
+            width: 150px;
+            height: 150px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px dashed #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        .counting-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .shape-with-items {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .counting-shape {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .items-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 2rem;
+        }
+        
+        .counting-item {
+            font-size: 2rem;
+        }
+        
+        .number-options {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .number-btn {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 50%;
+            border: 3px solid var(--secondary-color);
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .number-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .number-btn.correct {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+        
+        .number-btn.wrong {
+            background: #ffcccc;
+            border-color: #ff6666;
+        }
+        
+        .feedback-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .feedback-message.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .feedback-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feedback-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .feedback-message.correct {
+            border: 5px solid var(--success-color);
+        }
+        
+        .feedback-message.correct .feedback-text {
+            color: var(--success-color);
+        }
+        
+        .feedback-message.wrong {
+            border: 5px solid #ff6666;
+        }
+        
+        .feedback-message.wrong .feedback-text {
+            color: #ff6666;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .result-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+        
+        .result-screen.active {
+            display: flex;
+        }
+        
+        .result-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            animation: celebration 1s ease infinite;
+        }
+        
+        @keyframes celebration {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .result-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .result-score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .result-message {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            max-width: 600px;
+        }
+        
+        .result-recommendation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            max-width: 700px;
+        }
+        
+        .recommendation-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .recommendation-text {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .app-title {
+                font-size: 1.5rem;
+            }
+            
+            .star {
+                font-size: 1.5rem;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .start-title {
+                font-size: 2rem;
+            }
+            
+            .start-description {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .shape-item {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .drop-zone {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .color-box {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .shape-with-items {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .number-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .app-title {
+                font-size: 1.2rem;
+            }
+            
+            .shapes-row {
+                gap: 1rem;
+            }
+            
+            .drop-zones {
+                gap: 1rem;
+            }
+            
+            .color-boxes {
+                gap: 1rem;
+            }
+        }
+    </style>
+ </head>
+ <body>
+  <div class="app-container">
+   <header class="app-header">
+    <h1 class="app-title" id="appTitle">مغامرة الأشكال والألوان</h1>
+    <div class="stars-container" id="starsContainer"><span class="star">⭐</span> <span class="star">⭐</span> <span class="star">⭐</span>
+    </div>
+   </header>
+   <main class="main-content">
+    <div class="start-screen" id="startScreen">
+     <div class="start-icon">
+      🎨
+     </div>
+     <h2 class="start-title">مرحباً بك!</h2>
+     <p class="start-description">استعد لمغامرة ممتعة مع الأشكال والألوان! سنلعب ثلاث ألعاب رائعة معاً</p><button class="btn btn-primary" onclick="startGame()">ابدأ المغامرة 🚀</button>
+    </div>
+    <div class="level-screen" id="level1">
+     <div class="level-header">
+      <h2 class="level-title">المستوى الأول: تمييز الأشكال</h2>
+      <p class="level-instruction" id="level1Instruction">اسحب كل شكل إلى المكان الصحيح</p>
+     </div>
+     <div class="game-area">
+      <div class="shapes-row" id="shapesContainer"></div>
+      <div class="drop-zones" id="dropZonesContainer"></div>
+     </div>
+     <div class="navigation-buttons"><button class="btn btn-secondary" onclick="showScreen('start')">العودة</button> <button class="btn btn-primary" id="level1Next" style="display:none;" onclick="nextLevel(2)">التالي ⬅️</button>
+     </div>
+    </div>
+    <div class="level-screen" id="level2">
+     <div class="level-header">
+      <h2 class="level-title">المستوى الثاني: مطابقة الألوان</h2>
+      <p class="level-instruction" id="level2Instruction">اسحب الشكل إلى اللون المناسب</p>
+     </div>
+     <div class="game-area">
+      <div class="shapes-row" id="shapesContainer2"></div>
+      <div class="color-boxes" id="colorBoxesContainer"></div>
+     </div>
+     <div class="navigation-buttons"><button class="btn btn-secondary" onclick="showScreen('level1')">السابق</button> <button class="btn btn-primary" id="level2Next" style="display:none;" onclick="nextLevel(3)">التالي ⬅️</button>
+     </div>
+    </div>
+    <div class="level-screen" id="level3">
+     <div class="level-header">
+      <h2 class="level-title">المستوى الثالث: العد</h2>
+      <p class="level-instruction" id="level3Instruction">كم نجمة داخل الشكل؟</p>
+     </div>
+     <div class="game-area">
+      <div class="counting-container" id="countingContainer"></div>
+     </div>
+     <div class="navigation-buttons"><button class="btn btn-secondary" onclick="showScreen('level2')">السابق</button> <button class="btn btn-primary" id="level3Next" style="display:none;" onclick="showResults()">النتيجة 🎉</button>
+     </div>
+    </div>
+    <div class="result-screen" id="resultScreen">
+     <div class="result-icon">
+      🎉
+     </div>
+     <h2 class="result-title" id="completionMessage">مبروك! أنهيت جميع المستويات</h2>
+     <div class="result-score" id="resultScore">
+      3/3
+     </div>
+     <p class="result-message">لقد أتممت جميع التحديات بنجاح!</p>
+     <div class="result-recommendation">
+      <h3 class="recommendation-title">💡 توصية للأم/المعلمة</h3>
+      <p class="recommendation-text" id="recommendationText"></p>
+     </div><button class="btn btn-primary" onclick="resetGame()">ابدأ من جديد 🔄</button>
+    </div>
+   </main>
+   <div class="feedback-message" id="feedbackMessage">
+    <div class="feedback-icon" id="feedbackIcon"></div>
+    <div class="feedback-text" id="feedbackText"></div>
+   </div>
+  </div>
+  <script>
+        const audioBaseURL = 'https://example.com/sounds/';
+        
+        const defaultConfig = {
+            main_title: 'مغامرة الأشكال والألوان',
+            level1_instruction: 'اسحب كل شكل إلى المكان الصحيح',
+            level2_instruction: 'اسحب الشكل إلى اللون المناسب',
+            level3_instruction: 'كم نجمة داخل الشكل؟',
+            correct_message: 'أحسنت! إجابة رائعة 🎉',
+            wrong_message: 'حاول مرة أخرى يا بطل 💪',
+            completion_message: 'مبروك! أنهيت جميع المستويات'
+        };
+        
+        const config = { ...defaultConfig };
+        
+        const gameState = {
+            currentLevel: 0,
+            score: [false, false, false],
+            level1Completed: false,
+            level2Completed: false,
+            level3Completed: false
+        };
+        
+        const shapes = {
+            circle: '<svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="40" fill="#FF6B6B"/></svg>',
+            square: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="10" y="10" width="80" height="80" fill="#4ECDC4"/></svg>',
+            triangle: '<svg viewBox="0 0 100 100" width="100%" height="100%"><polygon points="50,10 90,90 10,90" fill="#FFE66D"/></svg>'
+        };
+        
+        const shapeNames = {
+            circle: 'دائرة',
+            square: 'مربع',
+            triangle: 'مثلث'
+        };
+        
+        async function onConfigChange(newConfig) {
+            Object.assign(config, newConfig);
+            
+            const titleElement = document.getElementById('appTitle');
+            if (titleElement) titleElement.textContent = config.main_title;
+            
+            const level1InstructionElement = document.getElementById('level1Instruction');
+            if (level1InstructionElement) level1InstructionElement.textContent = config.level1_instruction;
+            
+            const level2InstructionElement = document.getElementById('level2Instruction');
+            if (level2InstructionElement) level2InstructionElement.textContent = config.level2_instruction;
+            
+            const level3InstructionElement = document.getElementById('level3Instruction');
+            if (level3InstructionElement) level3InstructionElement.textContent = config.level3_instruction;
+            
+            const completionMessageElement = document.getElementById('completionMessage');
+            if (completionMessageElement) completionMessageElement.textContent = config.completion_message;
+        }
+        
+        function startGame() {
+            showScreen('level1');
+            initLevel1();
+        }
+        
+        function showScreen(screenName) {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('level1').classList.remove('active');
+            document.getElementById('level2').classList.remove('active');
+            document.getElementById('level3').classList.remove('active');
+            document.getElementById('resultScreen').classList.remove('active');
+            
+            if (screenName === 'start') {
+                document.getElementById('startScreen').style.display = 'flex';
+            } else if (screenName === 'level1') {
+                document.getElementById('level1').classList.add('active');
+            } else if (screenName === 'level2') {
+                document.getElementById('level2').classList.add('active');
+            } else if (screenName === 'level3') {
+                document.getElementById('level3').classList.add('active');
+            } else if (screenName === 'result') {
+                document.getElementById('resultScreen').classList.add('active');
+            }
+        }
+        
+        function initLevel1() {
+            const shapesContainer = document.getElementById('shapesContainer');
+            const dropZonesContainer = document.getElementById('dropZonesContainer');
+            
+            shapesContainer.innerHTML = '';
+            dropZonesContainer.innerHTML = '';
+            
+            const shapeTypes = ['circle', 'square', 'triangle'];
+            const shuffledShapes = [...shapeTypes].sort(() => Math.random() - 0.5);
+            
+            shuffledShapes.forEach(shapeType => {
+                const shapeDiv = document.createElement('div');
+                shapeDiv.className = 'shape-item';
+                shapeDiv.innerHTML = shapes[shapeType];
+                shapeDiv.setAttribute('draggable', 'true');
+                shapeDiv.setAttribute('data-shape', shapeType);
+                
+                shapeDiv.addEventListener('dragstart', handleDragStart);
+                shapeDiv.addEventListener('dragend', handleDragEnd);
+                
+                shapeDiv.addEventListener('touchstart', handleTouchStart);
+                shapeDiv.addEventListener('touchmove', handleTouchMove);
+                shapeDiv.addEventListener('touchend', handleTouchEnd);
+                
+                shapesContainer.appendChild(shapeDiv);
+            });
+            
+            shapeTypes.forEach(shapeType => {
+                const dropZone = document.createElement('div');
+                dropZone.className = 'drop-zone';
+                dropZone.setAttribute('data-shape', shapeType);
+                dropZone.innerHTML = `<span class="drop-zone-label">${shapeNames[shapeType]}</span>`;
+                
+                dropZone.addEventListener('dragover', handleDragOver);
+                dropZone.addEventListener('drop', handleDrop);
+                dropZone.addEventListener('dragleave', handleDragLeave);
+                
+                dropZonesContainer.appendChild(dropZone);
+            });
+        }
+        
+        let draggedElement = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        function handleDragStart(e) {
+            draggedElement = e.target;
+            e.target.classList.add('dragging');
+        }
+        
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('drag-over');
+        }
+        
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            
+            const dropZone = e.currentTarget;
+            const shapeType = draggedElement.getAttribute('data-shape');
+            const targetShape = dropZone.getAttribute('data-shape');
+            
+            if (shapeType === targetShape && !dropZone.classList.contains('filled')) {
+                dropZone.appendChild(draggedElement);
+                dropZone.classList.add('filled');
+                draggedElement.style.cursor = 'default';
+                draggedElement.setAttribute('draggable', 'false');
+                
+                showFeedback(true);
+                checkLevel1Complete();
+            } else {
+                showFeedback(false);
+            }
+        }
+        
+        function handleTouchStart(e) {
+            draggedElement = e.target;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            e.target.classList.add('dragging');
+        }
+        
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            draggedElement.style.position = 'fixed';
+            draggedElement.style.left = touch.clientX - 60 + 'px';
+            draggedElement.style.top = touch.clientY - 60 + 'px';
+            draggedElement.style.zIndex = '1000';
+        }
+        
+        function handleTouchEnd(e) {
+            const touch = e.changedTouches[0];
+            const dropZone = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            draggedElement.classList.remove('dragging');
+            draggedElement.style.position = '';
+            draggedElement.style.left = '';
+            draggedElement.style.top = '';
+            draggedElement.style.zIndex = '';
+            
+            if (dropZone && dropZone.classList.contains('drop-zone')) {
+                const shapeType = draggedElement.getAttribute('data-shape');
+                const targetShape = dropZone.getAttribute('data-shape');
+                
+                if (shapeType === targetShape && !dropZone.classList.contains('filled')) {
+                    dropZone.appendChild(draggedElement);
+                    dropZone.classList.add('filled');
+                    draggedElement.style.cursor = 'default';
+                    draggedElement.setAttribute('draggable', 'false');
+                    
+                    showFeedback(true);
+                    checkLevel1Complete();
+                } else {
+                    showFeedback(false);
+                }
+            }
+        }
+        
+        function checkLevel1Complete() {
+            const dropZones = document.querySelectorAll('#dropZonesContainer .drop-zone');
+            const allFilled = Array.from(dropZones).every(zone => zone.classList.contains('filled'));
+            
+            if (allFilled && !gameState.level1Completed) {
+                gameState.level1Completed = true;
+                gameState.score[0] = true;
+                updateStars();
+                document.getElementById('level1Next').style.display = 'inline-block';
+                playCelebrationSound();
+            }
+        }
+        
+        function initLevel2() {
+            const shapesContainer = document.getElementById('shapesContainer2');
+            const colorBoxesContainer = document.getElementById('colorBoxesContainer');
+            
+            shapesContainer.innerHTML = '';
+            colorBoxesContainer.innerHTML = '';
+            
+            const coloredShapes = [
+                { type: 'circle', color: '#FF6B6B' },
+                { type: 'square', color: '#4ECDC4' },
+                { type: 'triangle', color: '#FFE66D' }
+            ];
+            
+            const shuffledShapes = [...coloredShapes].sort(() => Math.random() - 0.5);
+            
+            shuffledShapes.forEach(shape => {
+                const shapeDiv = document.createElement('div');
+                shapeDiv.className = 'shape-item';
+                shapeDiv.innerHTML = shapes[shape.type].replace(/fill="[^"]*"/, `fill="${shape.color}"`);
+                shapeDiv.setAttribute('draggable', 'true');
+                shapeDiv.setAttribute('data-color', shape.color);
+                
+                shapeDiv.addEventListener('dragstart', handleDragStart);
+                shapeDiv.addEventListener('dragend', handleDragEnd);
+                shapeDiv.addEventListener('touchstart', handleTouchStart);
+                shapeDiv.addEventListener('touchmove', handleTouchMove);
+                shapeDiv.addEventListener('touchend', handleTouchEndLevel2);
+                
+                shapesContainer.appendChild(shapeDiv);
+            });
+            
+            coloredShapes.forEach(shape => {
+                const colorBox = document.createElement('div');
+                colorBox.className = 'color-box';
+                colorBox.style.backgroundColor = shape.color;
+                colorBox.setAttribute('data-color', shape.color);
+                
+                colorBox.addEventListener('dragover', handleDragOver);
+                colorBox.addEventListener('drop', handleDropLevel2);
+                colorBox.addEventListener('dragleave', handleDragLeave);
+                
+                colorBoxesContainer.appendChild(colorBox);
+            });
+        }
+        
+        function handleDropLevel2(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            
+            const colorBox = e.currentTarget;
+            const shapeColor = draggedElement.getAttribute('data-color');
+            const targetColor = colorBox.getAttribute('data-color');
+            
+            if (shapeColor === targetColor && !colorBox.classList.contains('filled')) {
+                colorBox.appendChild(draggedElement);
+                colorBox.classList.add('filled');
+                draggedElement.style.cursor = 'default';
+                draggedElement.setAttribute('draggable', 'false');
+                
+                showFeedback(true);
+                checkLevel2Complete();
+            } else {
+                showFeedback(false);
+            }
+        }
+        
+        function handleTouchEndLevel2(e) {
+            const touch = e.changedTouches[0];
+            const colorBox = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            draggedElement.classList.remove('dragging');
+            draggedElement.style.position = '';
+            draggedElement.style.left = '';
+            draggedElement.style.top = '';
+            draggedElement.style.zIndex = '';
+            
+            if (colorBox && colorBox.classList.contains('color-box')) {
+                const shapeColor = draggedElement.getAttribute('data-color');
+                const targetColor = colorBox.getAttribute('data-color');
+                
+                if (shapeColor === targetColor && !colorBox.classList.contains('filled')) {
+                    colorBox.appendChild(draggedElement);
+                    colorBox.classList.add('filled');
+                    draggedElement.style.cursor = 'default';
+                    draggedElement.setAttribute('draggable', 'false');
+                    
+                    showFeedback(true);
+                    checkLevel2Complete();
+                } else {
+                    showFeedback(false);
+                }
+            }
+        }
+        
+        function checkLevel2Complete() {
+            const colorBoxes = document.querySelectorAll('#colorBoxesContainer .color-box');
+            const allFilled = Array.from(colorBoxes).every(box => box.classList.contains('filled'));
+            
+            if (allFilled && !gameState.level2Completed) {
+                gameState.level2Completed = true;
+                gameState.score[1] = true;
+                updateStars();
+                document.getElementById('level2Next').style.display = 'inline-block';
+                playCelebrationSound();
+            }
+        }
+        
+        function initLevel3() {
+            const countingContainer = document.getElementById('countingContainer');
+            countingContainer.innerHTML = '';
+            
+            const randomCount = Math.floor(Math.random() * 5) + 3;
+            const shapeType = ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)];
+            
+            const shapeContainer = document.createElement('div');
+            shapeContainer.className = 'shape-with-items';
+            
+            const shapeSVG = document.createElement('div');
+            shapeSVG.className = 'counting-shape';
+            shapeSVG.innerHTML = shapes[shapeType];
+            
+            const itemsContainer = document.createElement('div');
+            itemsContainer.className = 'items-inside';
+            
+            for (let i = 0; i < randomCount; i++) {
+                const star = document.createElement('span');
+                star.className = 'counting-item';
+                star.textContent = '⭐';
+                itemsContainer.appendChild(star);
+            }
+            
+            shapeContainer.appendChild(shapeSVG);
+            shapeContainer.appendChild(itemsContainer);
+            countingContainer.appendChild(shapeContainer);
+            
+            const numbersContainer = document.createElement('div');
+            numbersContainer.className = 'number-options';
+            
+            const options = generateNumberOptions(randomCount);
+            options.forEach(num => {
+                const btn = document.createElement('button');
+                btn.className = 'number-btn';
+                btn.textContent = num;
+                btn.onclick = () => checkAnswer(num, randomCount, btn);
+                numbersContainer.appendChild(btn);
+            });
+            
+            countingContainer.appendChild(numbersContainer);
+        }
+        
+        function generateNumberOptions(correctAnswer) {
+            const options = [correctAnswer];
+            
+            while (options.length < 3) {
+                const randomNum = Math.floor(Math.random() * 7) + 2;
+                if (!options.includes(randomNum)) {
+                    options.push(randomNum);
+                }
+            }
+            
+            return options.sort(() => Math.random() - 0.5);
+        }
+        
+        function checkAnswer(selected, correct, btn) {
+            const allButtons = document.querySelectorAll('.number-btn');
+            allButtons.forEach(b => b.disabled = true);
+            
+            if (selected === correct) {
+                btn.classList.add('correct');
+                showFeedback(true);
+                gameState.level3Completed = true;
+                gameState.score[2] = true;
+                updateStars();
+                
+                setTimeout(() => {
+                    document.getElementById('level3Next').style.display = 'inline-block';
+                }, 1000);
+                
+                playCelebrationSound();
+            } else {
+                btn.classList.add('wrong');
+                showFeedback(false);
+                
+                setTimeout(() => {
+                    btn.classList.remove('wrong');
+                    allButtons.forEach(b => b.disabled = false);
+                }, 1500);
+            }
+        }
+        
+        function showFeedback(isCorrect) {
+            const feedbackDiv = document.getElementById('feedbackMessage');
+            const iconDiv = document.getElementById('feedbackIcon');
+            const textDiv = document.getElementById('feedbackText');
+            
+            feedbackDiv.className = 'feedback-message';
+            
+            if (isCorrect) {
+                feedbackDiv.classList.add('correct');
+                iconDiv.textContent = '✅';
+                textDiv.textContent = config.correct_message;
+                playCorrectSound();
+            } else {
+                feedbackDiv.classList.add('wrong');
+                iconDiv.textContent = '❌';
+                textDiv.textContent = config.wrong_message;
+                playWrongSound();
+            }
+            
+            feedbackDiv.classList.add('show');
+            
+            setTimeout(() => {
+                feedbackDiv.classList.remove('show');
+            }, 2000);
+        }
+        
+        function updateStars() {
+            const stars = document.querySelectorAll('.star');
+            gameState.score.forEach((earned, index) => {
+                if (earned) {
+                    stars[index].classList.add('earned');
+                }
+            });
+        }
+        
+        function nextLevel(level) {
+            if (level === 2) {
+                showScreen('level2');
+                initLevel2();
+            } else if (level === 3) {
+                showScreen('level3');
+                initLevel3();
+            }
+        }
+        
+        function showResults() {
+            const totalScore = gameState.score.filter(s => s).length;
+            document.getElementById('resultScore').textContent = `${totalScore}/3`;
+            
+            let recommendation = '';
+            if (totalScore === 3) {
+                recommendation = 'ممتاز! الطفل أظهر فهماً رائعاً للأشكال والألوان والأعداد. يُنصح بالانتقال إلى أنشطة أكثر تعقيداً مثل الأنماط والتصنيف المتقدم.';
+            } else if (totalScore === 2) {
+                recommendation = 'جيد جداً! الطفل يحتاج إلى مزيد من التدريب في المستوى الذي لم يكمله. يُنصح بتكرار النشاط مع تقديم مساعدة إضافية.';
+            } else {
+                recommendation = 'الطفل بحاجة إلى مزيد من التدريب الأساسي على الأشكال والألوان. يُنصح بممارسة أنشطة أبسط مثل التلوين والرسم قبل تكرار هذا النشاط.';
+            }
+            
+            document.getElementById('recommendationText').textContent = recommendation;
+            showScreen('result');
+        }
+        
+        function resetGame() {
+            gameState.level1Completed = false;
+            gameState.level2Completed = false;
+            gameState.level3Completed = false;
+            gameState.score = [false, false, false];
+            
+            document.getElementById('level1Next').style.display = 'none';
+            document.getElementById('level2Next').style.display = 'none';
+            document.getElementById('level3Next').style.display = 'none';
+            
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => star.classList.remove('earned'));
+            
+            showScreen('start');
+        }
+        
+        function playCorrectSound() {
+            console.log('صوت الإجابة الصحيحة');
+        }
+        
+        function playWrongSound() {
+            console.log('صوت الإجابة الخاطئة');
+        }
+        
+        function playCelebrationSound() {
+            console.log('صوت الاحتفال');
+        }
+        
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ['main_title', config.main_title || defaultConfig.main_title],
+                    ['level1_instruction', config.level1_instruction || defaultConfig.level1_instruction],
+                    ['level2_instruction', config.level2_instruction || defaultConfig.level2_instruction],
+                    ['level3_instruction', config.level3_instruction || defaultConfig.level3_instruction],
+                    ['correct_message', config.correct_message || defaultConfig.correct_message],
+                    ['wrong_message', config.wrong_message || defaultConfig.wrong_message],
+                    ['completion_message', config.completion_message || defaultConfig.completion_message]
+                ])
+            });
+        }
+        
+        onConfigChange(defaultConfig);
+    </script>
+ </body>
+</html>

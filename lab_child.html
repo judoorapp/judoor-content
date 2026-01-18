@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معمل العالم الصغير - تجارب علمية ممتعة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Changa', sans-serif;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2C3E50;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :root {
+            --primary-color: #4CAF50; /* أخضر علمي */
+            --secondary-color: #2196F3; /* أزرق تجارب */
+            --accent-color: #FFC107; /* أصفر إشراق */
+            --success-color: #8BC34A; /* أخضر نجاح */
+            --background-color: #E8F5E9; /* خلفية فاتحة */
+            --text-color: #2E7D32; /* نص داكن */
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --radius: 20px;
+        }
+
+        .app-container {
+            width: 95%;
+            max-width: 900px;
+            height: 95%;
+            background: var(--background-color);
+            border-radius: var(--radius);
+            box-shadow: 0 0 50px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .app-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .star {
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.3;
+        }
+
+        .star.earned {
+            filter: grayscale(0%);
+            opacity: 1;
+            animation: starPop 0.5s ease;
+        }
+
+        @keyframes starPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .start-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .start-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .start-description {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .level-screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .level-screen.active {
+            display: flex;
+        }
+
+        .level-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .level-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .level-instruction {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .game-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Level 1: Color Mixer Specific Styles */
+        .color-mixer-container {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .color-bottle-item {
+            width: 80px;
+            height: 180px;
+            border: 4px solid var(--primary-color);
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .color-bottle-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        .color-liquid {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0; /* Starts empty */
+            transition: height 0.5s ease-out;
+        }
+        .mixing-bowl {
+            width: 180px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border-radius: 0 0 90px 90px;
+            border: 5px solid var(--primary-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .mixed-liquid {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            transition: background-color 1s ease-in-out;
+        }
+        .target-color-display {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px dashed var(--secondary-color);
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--text-color);
+            background-color: white;
+        }
+
+        /* Level 2: Volcano Specific Styles */
+        .volcano-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        .volcano-model {
+            width: 280px;
+            height: 250px;
+            background-color: #A1887F; /* بني */
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 5px solid #8D6E63;
+        }
+        .volcano-model::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 180px solid #8D6E63; /* بني أغمق */
+            z-index: 1;
+        }
+        .volcano-crater {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 35px;
+            background-color: #3E2723; /* أسود بني */
+            border-radius: 50%;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .volcano-eruption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to top, #FF7043, #FFCA28); /* برتقالي لأصفر */
+            border-radius: 50%;
+            transition: height 1s ease-out, opacity 0.5s ease;
+            opacity: 0;
+            z-index: 3;
+        }
+        .ingredient-options {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .ingredient-btn {
+            background-color: #B2DFDB; /* تركواز فاتح */
+            color: var(--text-color);
+            padding: 12px 25px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+        .ingredient-btn:hover {
+            background-color: #80CBC4; /* تركواز */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .ingredient-btn.selected {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 0 4px var(--accent-color);
+            transform: scale(1.05);
+        }
+        .action-button-volcano {
+            margin-top: 2rem;
+            background: linear-gradient(135deg, var(--accent-color), #FFEB3B);
+            color: var(--text-color);
+        }
+
+        /* Level 3: Matter Sorting Specific Styles */
+        .matter-sorting-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+        }
+        .matter-item-img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border: 4px solid var(--primary-color);
+            border-radius: var(--radius);
+            padding: 10px;
+            background-color: white;
+            cursor: grab;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+        .matter-item-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .matter-item-img.dragging {
+            opacity: 0.6;
+        }
+        .matter-drop-zones {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        .matter-drop-zone {
+            width: 200px;
+            height: 200px;
+            border: 4px dashed var(--secondary-color);
+            border-radius: var(--radius);
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-top: 30px;
+            box-shadow: var(--shadow);
+        }
+        .matter-drop-zone.drag-over {
+            border-color: var(--primary-color);
+            background: rgba(76, 175, 80, 0.1);
+            transform: scale(1.05);
+        }
+        .matter-drop-zone.filled {
+            border-color: var(--success-color);
+            background: rgba(139, 195, 74, 0.15);
+        }
+        .matter-zone-label {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--text-color);
+            position: absolute;
+            top: 15px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feedback-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-message.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .feedback-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .feedback-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .feedback-message.correct {
+            border: 5px solid var(--success-color);
+        }
+
+        .feedback-message.correct .feedback-text {
+            color: var(--success-color);
+        }
+
+        .feedback-message.wrong {
+            border: 5px solid #ff6666;
+        }
+
+        .feedback-message.wrong .feedback-text {
+            color: #ff6666;
+        }
+
+        .result-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .result-screen.active {
+            display: flex;
+        }
+
+        .result-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            animation: celebration 1s ease infinite;
+        }
+
+        @keyframes celebration {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-message {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            max-width: 600px;
+        }
+
+        .result-recommendation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            max-width: 700px;
+        }
+
+        .recommendation-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-text {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .app-title {
+                font-size: 1.5rem;
+            }
+            .star {
+                font-size: 1.5rem;
+            }
+            .main-content {
+                padding: 1rem;
+            }
+            .start-title {
+                font-size: 2rem;
+            }
+            .start-description {
+                font-size: 1.1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+            }
+            .color-bottle-item {
+                width: 60px;
+                height: 140px;
+            }
+            .mixing-bowl {
+                width: 140px;
+                height: 80px;
+            }
+            .target-color-display {
+                width: 80px;
+                height: 80px;
+            }
+            .volcano-model {
+                width: 200px;
+                height: 180px;
+            }
+            .volcano-model::before {
+                border-left: 80px solid transparent;
+                border-right: 80px solid transparent;
+                border-bottom: 120px solid #8D6E63;
+            }
+            .volcano-crater {
+                width: 50px;
+                height: 25px;
+            }
+            .ingredient-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            .matter-item-img {
+                width: 100px;
+                height: 100px;
+            }
+            .matter-drop-zone {
+                width: 150px;
+                height: 150px;
+            }
+            .matter-zone-label {
+                font-size: 1.2em;
+            }
+            .feedback-icon {
+                font-size: 3rem;
+            }
+            .feedback-text {
+                font-size: 1.5rem;
+            }
+            .result-icon {
+                font-size: 5rem;
+            }
+            .result-title {
+                font-size: 2rem;
+            }
+            .result-score {
+                font-size: 2.5rem;
+            }
+            .result-message {
+                font-size: 1.2rem;
+            }
+            .recommendation-title {
+                font-size: 1.3rem;
+            }
+            .recommendation-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="app-title" id="appTitle">معمل العالم الصغير 🧪</h1>
+            <div class="stars-container" id="starsContainer">
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+            </div>
+        </header>
+        <main class="main-content">
+            <!-- الشاشة الافتتاحية -->
+            <div class="start-screen" id="startScreen">
+                <div class="start-icon">🧪</div>
+                <h2 class="start-title">مرحباً بك في معمل العالم الصغير!</h2>
+                <p class="start-description">استعد لتجارب علمية ممتعة ومثيرة. هيا بنا نتعلم ونكتشف!</p>
+                <button class="btn btn-primary" onclick="startGame()">ابدأ التجارب 🔬</button>
+            </div>
+
+            <!-- المستوى الأول: خلط الألوان السحرية -->
+            <div class="level-screen" id="level1">
+                <div class="level-header">
+                    <h2 class="level-title">المستوى الأول: خلط الألوان السحرية</h2>
+                    <p class="level-instruction" id="level1Instruction">امزج لونين للحصول على اللون المطلوب في الوعاء!</p>
+                </div>
+                <div class="game-area">
+                    <p>اللون المطلوب: <span id="targetColorName" style="font-weight: bold; color: var(--secondary-color);"></span></p>
+                    <div class="target-color-display" id="targetColorDisplay"></div>
+                    <div class="color-mixer-container">
+                        <div class="color-bottle-item" data-color="red" onclick="addColor('red')">
+                            <div class="color-liquid" style="background-color: red;"></div>
+                        </div>
+                        <div class="color-bottle-item" data-color="blue" onclick="addColor('blue')">
+                            <div class="color-liquid" style="background-color: blue;"></div>
+                        </div>
+                        <div class="color-bottle-item" data-color="yellow" onclick="addColor('yellow')">
+                            <div class="color-liquid" style="background-color: yellow;"></div>
+                        </div>
+                        <div class="mixing-bowl">
+                            <div class="mixed-liquid" id="mixedColorBowl"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="checkColorMix()">تحقق من اللون 🌈</button>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="showScreen('start')">العودة</button>
+                    <button class="btn btn-primary" id="level1Next" style="display:none;" onclick="nextLevel(2)">التالي ➡️</button>
+                </div>
+            </div>
+
+            <!-- المستوى الثاني: البركان الثائر -->
+            <div class="level-screen" id="level2">
+                <div class="level-header">
+                    <h2 class="level-title">المستوى الثاني: البركان الثائر</h2>
+                    <p class="level-instruction" id="level2Instruction">اجعل البركان يثور بوضع المكونات بالترتيب الصحيح!</p>
+                </div>
+                <div class="game-area volcano-container">
+                    <div class="volcano-model">
+                        <div class="volcano-crater">
+                            <div class="volcano-eruption" id="volcanoEruption"></div>
+                        </div>
+                    </div>
+                    <div class="ingredient-options" id="ingredientOptions">
+                        <button class="ingredient-btn" data-ingredient="خل" onclick="selectIngredient(this, 'خل')">خل</button>
+                        <button class="ingredient-btn" data-ingredient="بيكربونات الصوديوم" onclick="selectIngredient(this, 'بيكربونات الصوديوم')">بيكربونات الصوديوم</button>
+                        <button class="ingredient-btn" data-ingredient="ماء" onclick="selectIngredient(this, 'ماء')">ماء</button>
+                    </div>
+                    <button class="btn btn-primary action-button-volcano" onclick="triggerVolcano()">شغل البركان! 🔥</button>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="showScreen('level1')">السابق</button>
+                    <button class="btn btn-primary" id="level2Next" style="display:none;" onclick="nextLevel(3)">التالي ➡️</button>
+                </div>
+            </div>
+
+            <!-- المستوى الثالث: فرز المواد (صلب، سائل، غاز) -->
+            <div class="level-screen" id="level3">
+                <div class="level-header">
+                    <h2 class="level-title">المستوى الثالث: فرز المواد</h2>
+                    <p class="level-instruction" id="level3Instruction">اسحب كل مادة إلى حالتها الصحيحة (صلب، سائل، غاز).</p>
+                </div>
+                <div class="game-area matter-sorting-container">
+                    <div class="shapes-row" id="matterItemsContainer">
+                        <!-- سيتم تحميل الصور هنا بواسطة JS -->
+                    </div>
+                    <div class="matter-drop-zones" id="matterDropZonesContainer">
+                        <div class="matter-drop-zone" data-state="صلب">
+                            <span class="matter-zone-label">صلب 🧊</span>
+                        </div>
+                        <div class="matter-drop-zone" data-state="سائل">
+                            <span class="matter-zone-label">سائل 💧</span>
+                        </div>
+                        <div class="matter-drop-zone" data-state="غاز">
+                            <span class="matter-zone-label">غاز 💨</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="showScreen('level2')">السابق</button>
+                    <button class="btn btn-primary" id="level3Next" style="display:none;" onclick="showResults()">النتائج 🎉</button>
+                </div>
+            </div>
+
+            <!-- شاشة النتائج النهائية -->
+            <div class="result-screen" id="resultScreen">
+                <div class="result-icon">🎉</div>
+                <h2 class="result-title" id="completionMessage">تهانينا! أكملت جميع التجارب</h2>
+                <div class="result-score" id="resultScore"></div>
+                <p class="result-message">لقد أظهرت روح العالم الصغير فيك!</p>
+                <div class="result-recommendation">
+                    <h3 class="recommendation-title">💡 توصية للأم/المعلمة</h3>
+                    <p class="recommendation-text" id="recommendationText"></p>
+                </div>
+                <button class="btn btn-primary" onclick="resetGame()">ابدأ من جديد 🔄</button>
+            </div>
+        </main>
+        <div class="feedback-message" id="feedbackMessage">
+            <div class="feedback-icon" id="feedbackIcon"></div>
+            <div class="feedback-text" id="feedbackText"></div>
+        </div>
+    </div>
+
+    <script>
+        // تعريفات الإعدادات الافتراضية والرسائل
+        const defaultConfig = {
+            main_title: 'معمل العالم الصغير',
+            level1_instruction: 'امزج لونين للحصول على اللون المطلوب في الوعاء!',
+            level2_instruction: 'اجعل البركان يثور بوضع المكونات بالترتيب الصحيح!',
+            level3_instruction: 'اسحب كل مادة إلى حالتها الصحيحة (صلب، سائل، غاز).',
+            correct_message: 'أحسنت! إجابة رائعة 🎉',
+            wrong_message: 'حاول مرة أخرى يا بطل 💪',
+            completion_message: 'تهانينا! أكملت جميع التجارب',
+            // رسائل توصية إضافية
+            recommendation_full_score: 'ممتاز! الطفل أظهر فهمًا رائعًا للمفاهيم العلمية الأساسية. يُنصح بالانتقال إلى تجارب أكثر تعقيداً أو استكشاف مجالات علمية جديدة.',
+            recommendation_partial_score: 'جيد جداً! الطفل يحتاج إلى مزيد من التدريب في المستويات التي لم يكملها. يُنصح بتكرار النشاط مع تقديم مساعدة إضافية وشرح للمفاهيم.',
+            recommendation_low_score: 'الطفل بحاجة إلى مزيد من التدريب الأساسي على المفاهيم العلمية المقدمة. يُنصح بممارسة أنشطة أبسط لشرح المبادئ وتكرار هذا النشاط لاحقًا.'
+        };
+
+        const config = { ...defaultConfig };
+
+        // حالة اللعبة لجمع النتائج
+        const gameState = {
+            currentLevel: 0, // 0: intro, 1: level1, 2: level2, 3: level3, 4: results
+            score: [false, false, false], // لتدوين ما إذا كان كل مستوى قد تم إكماله بشكل صحيح (محاولة صحيحة واحدة كافية)
+            questionStates: {} // لتخزين تفاصيل كل سؤال كما هو مطلوب في الـ JSON
+        };
+
+        let currentQuestionGlobalId = 0; // معرف فريد لكل سؤال يتم تقديمه
+        let questionStartTime; // لبدء حساب responseTimeMs
+
+        // تعريف الألوان للتحدي الأول
+        const colorQuestions = [
+            { targetColor: 'green', targetName: 'أخضر', mix: ['yellow', 'blue'] },
+            { targetColor: 'purple', targetName: 'بنفسجي', mix: ['red', 'blue'] },
+            { targetColor: 'orange', targetName: 'برتقالي', mix: ['red', 'yellow'] },
+        ];
+        let currentColorQuestionIndex = 0;
+        let selectedColors = [];
+        let level1Attempts = 0;
+
+        // تعريف المكونات لتحدي البركان
+        const volcanoSequence = ['خل', 'بيكربونات الصوديوم'];
+        let selectedVolcanoIngredients = [];
+        let level2Attempts = 0;
+
+        // تعريف المواد لتحدي الفرز
+        const matterItems = [
+            { id: 'ice', src: 'https://i.ibb.co/k2x217S/ice-cube.png', state: 'صلب', name: 'مكعب ثلج' },
+            { id: 'water', src: 'https://i.ibb.co/jLbL47G/water.png', state: 'سائل', name: 'ماء' },
+            { id: 'steam', src: 'https://i.ibb.co/jWw3j3h/steam.png', state: 'غاز', name: 'بخار' },
+            { id: 'rock', src: 'https://i.ibb.co/f4b1k5k/rock.png', state: 'صلب', name: 'صخرة' },
+            { id: 'juice', src: 'https://i.ibb.co/8Y3VzB1/juice.png', state: 'سائل', name: 'عصير' },
+            { id: 'balloon', src: 'https://i.ibb.co/GvxYvXp/balloon.png', state: 'غاز', name: 'بالون' },
+        ];
+        let shuffledMatterItems = [];
+        let level3Attempts = 0;
+        let droppedMatterItemsCount = 0; // لتعقب عدد العناصر التي تم إسقاطها بشكل صحيح
+
+
+        // ===========================================
+        // وظائف عامة لإدارة الشاشات والتقييم
+        // ===========================================
+
+        function updateStars() {
+            const stars = document.querySelectorAll('.star');
+            gameState.score.forEach((earned, index) => {
+                if (earned) {
+                    stars[index].classList.add('earned');
+                }
+            });
+        }
+
+        function showScreen(screenName) {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('level1').classList.remove('active');
+            document.getElementById('level2').classList.remove('active');
+            document.getElementById('level3').classList.remove('active');
+            document.getElementById('resultScreen').classList.remove('active');
+
+            if (screenName === 'start') {
+                document.getElementById('startScreen').style.display = 'flex';
+                gameState.currentLevel = 0;
+            } else if (screenName === 'level1') {
+                document.getElementById('level1').classList.add('active');
+                gameState.currentLevel = 1;
+                questionStartTime = Date.now(); // بدء توقيت السؤال الأول
+            } else if (screenName === 'level2') {
+                document.getElementById('level2').classList.add('active');
+                gameState.currentLevel = 2;
+                questionStartTime = Date.now(); // بدء توقيت السؤال الثاني
+            } else if (screenName === 'level3') {
+                document.getElementById('level3').classList.add('active');
+                gameState.currentLevel = 3;
+                questionStartTime = Date.now(); // بدء توقيت السؤال الثالث
+            } else if (screenName === 'result') {
+                document.getElementById('resultScreen').classList.add('active');
+                gameState.currentLevel = 4;
+            }
+        }
+
+        function startGame() {
+            showScreen('level1');
+            initLevel1();
+        }
+
+        function nextLevel(level) {
+            if (level === 2) {
+                showScreen('level2');
+                initLevel2();
+            } else if (level === 3) {
+                showScreen('level3');
+                initLevel3();
+            }
+        }
+
+        function showResults() {
+            const totalScore = gameState.score.filter(s => s).length;
+            document.getElementById('resultScore').textContent = `${totalScore}/3`;
+
+            let recommendation = '';
+            if (totalScore === 3) {
+                recommendation = config.recommendation_full_score;
+            } else if (totalScore >= 1) { // 1 أو 2
+                recommendation = config.recommendation_partial_score;
+            } else { // 0
+                recommendation = config.recommendation_low_score;
+            }
+
+            document.getElementById('recommendationText').textContent = recommendation;
+            showScreen('result');
+            finishGameAndSendResult(); // إرسال النتائج النهائية
+        }
+
+        function resetGame() {
+            gameState.score = [false, false, false];
+            gameState.questionStates = {};
+            currentQuestionGlobalId = 0;
+
+            document.getElementById('level1Next').style.display = 'none';
+            document.getElementById('level2Next').style.display = 'none';
+            document.getElementById('level3Next').style.display = 'none';
+
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => star.classList.remove('earned'));
+
+            // إعادة تعيين عناصر كل مستوى
+            currentColorQuestionIndex = 0;
+            selectedColors = [];
+            level1Attempts = 0;
+            selectedVolcanoIngredients = [];
+            level2Attempts = 0;
+            shuffledMatterItems = [];
+            level3Attempts = 0;
+            droppedMatterItemsCount = 0;
+
+
+            showScreen('start');
+        }
+
+        function showFeedback(isCorrect, message = null) {
+            const feedbackDiv = document.getElementById('feedbackMessage');
+            const iconDiv = document.getElementById('feedbackIcon');
+            const textDiv = document.getElementById('feedbackText');
+
+            feedbackDiv.className = 'feedback-message';
+
+            if (isCorrect) {
+                feedbackDiv.classList.add('correct');
+                iconDiv.textContent = '✅';
+                textDiv.textContent = message || config.correct_message;
+                playCorrectSound();
+            } else {
+                feedbackDiv.classList.add('wrong');
+                iconDiv.textContent = '❌';
+                textDiv.textContent = message || config.wrong_message;
+                playWrongSound();
+            }
+
+            feedbackDiv.classList.add('show');
+
+            setTimeout(() => {
+                feedbackDiv.classList.remove('show');
+            }, 2000);
+        }
+
+        // ===========================================
+        // وظائف Level 1: خلط الألوان السحرية
+        // ===========================================
+
+        function initLevel1() {
+            const currentQ = colorQuestions[currentColorQuestionIndex];
+            document.getElementById('targetColorName').textContent = currentQ.targetName;
+            document.getElementById('targetColorDisplay').style.backgroundColor = currentQ.targetColor;
+
+            document.getElementById('mixedColorBowl').style.backgroundColor = 'transparent';
+            selectedColors = [];
+            document.querySelectorAll('.color-liquid').forEach(liquid => liquid.style.height = '0');
+            
+            // تهيئة بيانات السؤال في questionStates لأول مرة
+            if (!gameState.questionStates[currentQuestionGlobalId]) {
+                gameState.questionStates[currentQuestionGlobalId] = { attempts: 0, isCorrect: false, responseTimeMs: 0, userAnswer: '' };
+            }
+        }
+
+        function addColor(color) {
+            if (selectedColors.length < 2 && !selectedColors.includes(color)) {
+                selectedColors.push(color);
+                const bottle = document.querySelector(`.color-bottle-item[data-color="${color}"] .color-liquid`);
+                bottle.style.height = '100%';
+                updateMixedColor();
+            } else if (selectedColors.includes(color)) {
+                // Remove color if already selected
+                selectedColors = selectedColors.filter(c => c !== color);
+                const bottle = document.querySelector(`.color-bottle-item[data-color="${color}"] .color-liquid`);
+                bottle.style.height = '0';
+                updateMixedColor();
+            }
+        }
+
+        function updateMixedColor() {
+            const mixedColorBowl = document.getElementById('mixedColorBowl');
+            if (selectedColors.length === 0) {
+                mixedColorBowl.style.backgroundColor = 'transparent';
+            } else if (selectedColors.length === 1) {
+                mixedColorBowl.style.backgroundColor = selectedColors[0];
+            } else if (selectedColors.length === 2) {
+                const sortedColors = [...selectedColors].sort(); // لضمان ترتيب ثابت للمقارنة
+                let mixed;
+                if ((sortedColors[0] === 'blue' && sortedColors[1] === 'yellow')) mixed = 'green';
+                else if ((sortedColors[0] === 'blue' && sortedColors[1] === 'red')) mixed = 'purple';
+                else if ((sortedColors[0] === 'red' && sortedColors[1] === 'yellow')) mixed = 'orange';
+                else mixed = 'gray'; // للتحقق من الألوان غير المتوقعة
+                mixedColorBowl.style.backgroundColor = mixed;
+            }
+            gameState.questionStates[currentQuestionGlobalId].userAnswer = mixedColorBowl.style.backgroundColor;
+        }
+
+        function checkColorMix() {
+            level1Attempts++;
+            gameState.questionStates[currentQuestionGlobalId].attempts = level1Attempts;
+
+            const currentMixedColor = document.getElementById('mixedColorBowl').style.backgroundColor;
+            const targetColor = colorQuestions[currentColorQuestionIndex].targetColor;
+
+            if (currentMixedColor === targetColor) {
+                const responseTimeMs = Date.now() - questionStartTime;
+                showFeedback(true);
+                gameState.score[0] = true; // تم إكمال المستوى 1 بنجاح
+                gameState.questionStates[currentQuestionGlobalId].isCorrect = true;
+                gameState.questionStates[currentQuestionGlobalId].responseTimeMs = responseTimeMs;
+                updateStars();
+                document.getElementById('level1Next').style.display = 'inline-block';
+                playCelebrationSound();
+            } else {
+                showFeedback(false);
+            }
+        }
+
+        // ===========================================
+        // وظائف Level 2: البركان الثائر
+        // ===========================================
+
+        function initLevel2() {
+            selectedVolcanoIngredients = [];
+            level2Attempts = 0;
+            document.querySelectorAll('#ingredientOptions .ingredient-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.disabled = false;
+            });
+            document.getElementById('volcanoEruption').style.height = '0';
+            document.getElementById('volcanoEruption').style.opacity = '0';
+
+            // تهيئة بيانات السؤال في questionStates لأول مرة
+            currentQuestionGlobalId++;
+            if (!gameState.questionStates[currentQuestionGlobalId]) {
+                gameState.questionStates[currentQuestionGlobalId] = { attempts: 0, isCorrect: false, responseTimeMs: 0, userAnswer: '' };
+            }
+        }
+
+        function selectIngredient(button, ingredient) {
+            // قم بإزالة جميع التحديدات أولاً (إذا أردت اختيار واحد فقط في كل مرة)
+            // إذا كنت تريد السماح باختيار متعدد مع إمكانية التراجع، اترك هذا الجزء
+            // document.querySelectorAll('#ingredientOptions .ingredient-btn').forEach(btn => btn.classList.remove('selected'));
+
+            if (!button.classList.contains('selected')) {
+                button.classList.add('selected');
+                selectedVolcanoIngredients.push(ingredient);
+            } else {
+                button.classList.remove('selected');
+                selectedVolcanoIngredients = selectedVolcanoIngredients.filter(item => item !== ingredient);
+            }
+            gameState.questionStates[currentQuestionGlobalId].userAnswer = selectedVolcanoIngredients.join(', ');
+        }
+
+        function triggerVolcano() {
+            level2Attempts++;
+            gameState.questionStates[currentQuestionGlobalId].attempts = level2Attempts;
+
+            const isCorrectSequence = selectedVolcanoIngredients.length === volcanoSequence.length &&
+                                      selectedVolcanoIngredients.every((val, index) => val === volcanoSequence[index]);
+
+            if (isCorrectSequence) {
+                const responseTimeMs = Date.now() - questionStartTime;
+                document.getElementById('volcanoEruption').style.height = '100%';
+                document.getElementById('volcanoEruption').style.opacity = '1';
+                showFeedback(true, 'نجحت في تشغيل البركان! إنه يثور!');
+                gameState.score[1] = true; // تم إكمال المستوى 2 بنجاح
+                gameState.questionStates[currentQuestionGlobalId].isCorrect = true;
+                gameState.questionStates[currentQuestionGlobalId].responseTimeMs = responseTimeMs;
+                updateStars();
+
+                // منع التفاعل بعد الإجابة الصحيحة
+                document.querySelectorAll('#ingredientOptions .ingredient-btn').forEach(btn => btn.disabled = true);
+                document.querySelector('.action-button-volcano').disabled = true;
+
+                document.getElementById('level2Next').style.display = 'inline-block';
+                playCelebrationSound();
+            } else {
+                showFeedback(false, 'الترتيب خاطئ! حاول مرة أخرى.');
+                // إعادة تعيين التحديد للمحاولة التالية
+                selectedVolcanoIngredients = [];
+                document.querySelectorAll('#ingredientOptions .ingredient-btn').forEach(btn => btn.classList.remove('selected'));
+            }
+        }
+
+        // ===========================================
+        // وظائف Level 3: فرز المواد
+        // ===========================================
+
+        let draggedElement = null; // العنصر الذي يتم سحبه
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        function initLevel3() {
+            const matterItemsContainer = document.getElementById('matterItemsContainer');
+            matterItemsContainer.innerHTML = '';
+            
+            // خلط العناصر بشكل عشوائي في كل مرة
+            shuffledMatterItems = [...matterItems].sort(() => Math.random() - 0.5);
+
+            shuffledMatterItems.forEach(item => {
+                const img = document.createElement('img');
+                img.className = 'matter-item-img';
+                img.src = item.src;
+                img.alt = item.name;
+                img.setAttribute('draggable', 'true');
+                img.setAttribute('data-state', item.state);
+                img.setAttribute('data-item-id', item.id);
+
+                img.addEventListener('dragstart', handleDragStart);
+                img.addEventListener('dragend', handleDragEnd);
+                img.addEventListener('touchstart', handleTouchStart);
+                img.addEventListener('touchmove', handleTouchMove);
+                img.addEventListener('touchend', handleTouchEndMatter);
+
+                matterItemsContainer.appendChild(img);
+            });
+
+            // إعادة تعيين مناطق الإفلات
+            document.querySelectorAll('.matter-drop-zone').forEach(zone => {
+                zone.classList.remove('filled');
+                zone.innerHTML = `<span class="matter-zone-label">${zone.getAttribute('data-state')} ${zone.getAttribute('data-state') === 'صلب' ? '🧊' : zone.getAttribute('data-state') === 'سائل' ? '💧' : '💨'}</span>`;
+            });
+            droppedMatterItemsCount = 0;
+            level3Attempts = 0;
+
+            // تهيئة بيانات السؤال في questionStates لأول مرة
+            currentQuestionGlobalId++;
+            if (!gameState.questionStates[currentQuestionGlobalId]) {
+                gameState.questionStates[currentQuestionGlobalId] = { attempts: 0, isCorrect: false, responseTimeMs: 0, userAnswer: {} };
+            }
+        }
+        
+        // ===========================================
+        // وظائف السحب والإفلات العامة
+        // ===========================================
+
+        function handleDragStart(e) {
+            draggedElement = e.target;
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.getAttribute('data-item-id')); // لتمرير البيانات
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            
+            const dropZone = e.currentTarget;
+            const droppedItemId = e.dataTransfer.getData('text/plain');
+            const droppedItem = document.querySelector(`[data-item-id="${droppedItemId}"]`);
+
+            const itemState = droppedItem.getAttribute('data-state');
+            const targetState = dropZone.getAttribute('data-state');
+
+            // تحديث محاولات المستوى
+            level3Attempts++;
+
+            // تهيئة كائن userAnswer إذا لم يكن موجودًا
+            if (typeof gameState.questionStates[currentQuestionGlobalId].userAnswer !== 'object') {
+                gameState.questionStates[currentQuestionGlobalId].userAnswer = {};
+            }
+            gameState.questionStates[currentQuestionGlobalId].userAnswer[droppedItemId] = targetState;
+
+
+            if (itemState === targetState && !dropZone.querySelector(`[data-item-id="${droppedItemId}"]`)) { // التأكد من عدم وجود العنصر بالفعل
+                dropZone.appendChild(droppedItem);
+                droppedItem.style.position = 'static'; // إعادة تعيين الموضع بعد الإفلات
+                droppedItem.style.transform = 'none';
+                droppedItem.style.cursor = 'default';
+                droppedItem.setAttribute('draggable', 'false'); // منع سحبه مرة أخرى
+                dropZone.classList.add('filled'); // للدلالة على وجود عنصر بداخلها
+
+                showFeedback(true);
+                droppedMatterItemsCount++;
+                checkLevel3Complete();
+            } else {
+                showFeedback(false);
+            }
+            gameState.questionStates[currentQuestionGlobalId].attempts = level3Attempts;
+        }
+
+        function handleTouchStart(e) {
+            draggedElement = e.target;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            e.target.classList.add('dragging');
+            // Store original position for matter items for touch
+            if (draggedElement.classList.contains('matter-item-img')) {
+                draggedElement.originalParent = draggedElement.parentNode;
+                draggedElement.originalNextSibling = draggedElement.nextSibling;
+                draggedElement.style.position = 'absolute'; // يجب أن يكون absolute ليتم تحريكه بحرية
+                draggedElement.style.zIndex = '1000';
+            }
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault(); // منع التمرير
+            const touch = e.touches[0];
+            draggedElement.style.left = touch.clientX - (draggedElement.offsetWidth / 2) + 'px';
+            draggedElement.style.top = touch.clientY - (draggedElement.offsetHeight / 2) + 'px';
+        }
+
+        function handleTouchEndMatter(e) {
+            const touch = e.changedTouches[0];
+            const dropZone = document.elementFromPoint(touch.clientX, touch.clientY);
+
+            draggedElement.classList.remove('dragging');
+            
+            // إعادة العنصر إلى مكانه الأصلي إذا لم يتم إسقاطه في منطقة صالحة
+            if (draggedElement.originalParent && (!dropZone || !dropZone.classList.contains('matter-drop-zone'))) {
+                draggedElement.originalParent.insertBefore(draggedElement, draggedElement.originalNextSibling);
+                draggedElement.style.position = 'static';
+                draggedElement.style.left = '';
+                draggedElement.style.top = '';
+                draggedElement.style.zIndex = '';
+            }
+            
+            if (dropZone && dropZone.classList.contains('matter-drop-zone')) {
+                const itemState = draggedElement.getAttribute('data-state');
+                const targetState = dropZone.getAttribute('data-state');
+                const droppedItemId = draggedElement.getAttribute('data-item-id');
+
+                level3Attempts++;
+
+                if (typeof gameState.questionStates[currentQuestionGlobalId].userAnswer !== 'object') {
+                    gameState.questionStates[currentQuestionGlobalId].userAnswer = {};
+                }
+                gameState.questionStates[currentQuestionGlobalId].userAnswer[droppedItemId] = targetState;
+
+
+                if (itemState === targetState && !dropZone.querySelector(`[data-item-id="${droppedItemId}"]`)) {
+                    dropZone.appendChild(draggedElement);
+                    draggedElement.style.position = 'static';
+                    draggedElement.style.transform = 'none';
+                    draggedElement.style.cursor = 'default';
+                    draggedElement.setAttribute('draggable', 'false');
+                    dropZone.classList.add('filled');
+
+                    showFeedback(true);
+                    droppedMatterItemsCount++;
+                    checkLevel3Complete();
+                } else {
+                    showFeedback(false);
+                }
+            }
+            gameState.questionStates[currentQuestionGlobalId].attempts = level3Attempts;
+        }
+
+
+        function checkLevel3Complete() {
+            if (droppedMatterItemsCount === shuffledMatterItems.length) {
+                const responseTimeMs = Date.now() - questionStartTime;
+                showFeedback(true);
+                gameState.score[2] = true; // تم إكمال المستوى 3 بنجاح
+                gameState.questionStates[currentQuestionGlobalId].isCorrect = true;
+                gameState.questionStates[currentQuestionGlobalId].responseTimeMs = responseTimeMs;
+                updateStars();
+                document.getElementById('level3Next').style.display = 'inline-block';
+                playCelebrationSound();
+            }
+        }
+
+
+        // ===========================================
+        // وظائف الصوت (محاكاة)
+        // ===========================================
+        function playCorrectSound() {
+            console.log('تشغيل صوت الإجابة الصحيحة');
+        }
+
+        function playWrongSound() {
+            console.log('تشغيل صوت الإجابة الخاطئة');
+        }
+
+        function playCelebrationSound() {
+            console.log('تشغيل صوت الاحتفال');
+        }
+
+        // ===========================================
+        // دالة إرسال النتائج النهائية (مطلوبة)
+        // ===========================================
+        function finishGameAndSendResult() {
+            const resultPayload = {
+                "type": "StandardGameResult",
+                "payload": {
+                    "questionStates": gameState.questionStates
+                }
+            };
+
+            if (window.AndroidApp) {
+                window.AndroidApp.postMessage(JSON.stringify(resultPayload));
+            } else {
+                console.log("Result to be sent to Android: ", JSON.stringify(resultPayload));
+                console.log("Detailed Question States:", gameState.questionStates);
+            }
+        }
+
+        // ===========================================
+        // تهيئة التطبيق عند التحميل
+        // ===========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // قم بتعيين مستمعات أحداث السحب والإفلات لمناطق الإفلات العامة
+            document.querySelectorAll('.matter-drop-zone').forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', handleDrop);
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+
+            // تحديث الإعدادات الافتراضية إذا كان هناك SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange: (newConfig) => {
+                        Object.assign(config, newConfig);
+                        // تحديث عناصر الواجهة بناءً على التكوين الجديد
+                        document.getElementById('appTitle').textContent = config.main_title;
+                        document.getElementById('level1Instruction').textContent = config.level1_instruction;
+                        document.getElementById('level2Instruction').textContent = config.level2_instruction;
+                        document.getElementById('level3Instruction').textContent = config.level3_instruction;
+                        document.getElementById('completionMessage').textContent = config.completion_message;
+                    },
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ['main_title', config.main_title || defaultConfig.main_title],
+                        ['level1_instruction', config.level1_instruction || defaultConfig.level1_instruction],
+                        ['level2_instruction', config.level2_instruction || defaultConfig.level2_instruction],
+                        ['level3_instruction', config.level3_instruction || defaultConfig.level3_instruction],
+                        ['correct_message', config.correct_message || defaultConfig.correct_message],
+                        ['wrong_message', config.wrong_message || defaultConfig.wrong_message],
+                        ['completion_message', config.completion_message || defaultConfig.completion_message],
+                        ['recommendation_full_score', config.recommendation_full_score || defaultConfig.recommendation_full_score],
+                        ['recommendation_partial_score', config.recommendation_partial_score || defaultConfig.recommendation_partial_score],
+                        ['recommendation_low_score', config.recommendation_low_score || defaultConfig.recommendation_low_score]
+                    ])
+                });
+            }
+            // تطبيق الإعدادات الافتراضية عند تحميل الصفحة
+            // (أو بعد تلقي التكوين من SDK إذا كان موجودًا)
+            document.getElementById('appTitle').textContent = config.main_title;
+            document.getElementById('level1Instruction').textContent = config.level1_instruction;
+            document.getElementById('level2Instruction').textContent = config.level2_instruction;
+            document.getElementById('level3Instruction').textContent = config.level3_instruction;
+            document.getElementById('completionMessage').textContent = config.completion_message;
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خريطة العالم التفاعلية</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0f1f3d 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .country-marker {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+        
+        .country-marker:hover {
+            transform: scale(1.3);
+            filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.6));
+        }
+        
+        .country-marker.active {
+            animation: pulse 0.8s ease-in-out;
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9));
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .info-card {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .search-input, .filter-select {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus, .filter-select:focus {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(96, 165, 250, 0.6);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.65);
+        }
+        
+        .filter-select option {
+            background: #1a2744;
+            color: white;
+        }
+        
+        .continent-path {
+            transition: all 0.3s ease;
+        }
+        
+        .continent-path:hover {
+            opacity: 1 !important;
+            filter: brightness(1.2);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        
+        .info-item {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.12) 100%);
+            padding: 14px;
+            border-radius: 10px;
+            border-right: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateX(-4px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
+        .flag-emoji {
+            font-size: 72px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .map-container {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full gradient-bg">
+  <div class="h-full w-full overflow-auto">
+   <div class="min-h-full p-6 md:p-10"><!-- Header -->
+    <header class="text-center mb-10 fade-in-up">
+     <h1 id="main-title" class="text-5xl md:text-6xl font-bold gradient-text mb-4">خريطة العالم التفاعلية</h1>
+     <p id="subtitle" class="text-xl text-blue-200 font-medium">اكتشف معلومات مفصلة عن دول العالم</p>
+    </header><!-- Controls -->
+    <div class="max-w-7xl mx-auto mb-10 fade-in-up" style="animation-delay: 0.15s;">
+     <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center"><!-- Search -->
+      <div class="flex-1 relative"><input type="text" id="search-input" class="search-input w-full px-5 py-4 pr-14 rounded-xl text-lg" placeholder="ابحث عن دولة...">
+       <svg class="absolute left-5 top-1/2 transform -translate-y-1/2 w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+       </svg>
+      </div><!-- Filter by Continent --> <select id="continent-filter" class="filter-select px-5 py-4 rounded-xl cursor-pointer text-lg font-medium"> <option value="all">🌍 جميع القارات</option> <option value="asia">🌏 آسيا</option> <option value="africa">🌍 أفريقيا</option> <option value="europe">🇪🇺 أوروبا</option> <option value="north-america">🌎 أمريكا الشمالية</option> <option value="south-america">🌎 أمريكا الجنوبية</option> <option value="oceania">🌏 أوقيانوسيا</option> </select> <!-- Sort --> <select id="sort-select" class="filter-select px-5 py-4 rounded-xl cursor-pointer text-lg font-medium"> <option value="name">📝 الاسم</option> <option value="population">👥 السكان</option> <option value="area">📏 المساحة</option> </select>
+     </div>
+    </div><!-- World Map -->
+    <div class="max-w-7xl mx-auto mb-10 fade-in-up" style="animation-delay: 0.3s;">
+     <div class="map-container" style="position: relative; background-image: url('world-map.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <svg id="world-map" viewbox="0 0 1000 500" class="w-full h-auto" style="position: relative; z-index: 10;"><!-- Country markers will be added here by JavaScript -->
+      </svg>
+     </div>
+    </div><!-- Info Panel -->
+    <div id="info-panel" class="max-w-7xl mx-auto info-card p-8 hidden fade-in-up" style="animation-delay: 0.45s;">
+     <div id="country-info"></div>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            main_title: "خريطة العالم التفاعلية",
+            subtitle: "اكتشف معلومات مفصلة عن دول العالم",
+            search_placeholder: "ابحث عن دولة...",
+            background_color: "#0a1628",
+            surface_color: "#ffffff",
+            text_color: "#1e293b",
+            primary_action_color: "#3b82f6",
+            secondary_action_color: "#60a5fa"
+        };
+
+        const countries = [
+            // آسيا
+            {
+                id: 'saudi',
+                name: 'السعودية',
+                capital: 'الرياض',
+                continent: 'asia',
+                continentAr: 'آسيا',
+                population: '35 مليون',
+                area: '2,149,690 كم²',
+                currency: 'ريال سعودي',
+                language: 'العربية',
+                government: 'ملكية مطلقة',
+                independence: '1932',
+                highestPeak: 'جبل السودة (3,000 م)',
+                description: 'أكبر دولة في الشرق الأوسط وموطن الحرمين الشريفين',
+                flag: '🇸🇦',
+                x: 620,
+                y: 220
+            },
+            {
+                id: 'uae',
+                name: 'الإما��ات',
+                capital: 'أبوظبي',
+                continent: 'asia',
+                continentAr: 'آسيا',
+                population: '10 مليون',
+                area: '83,600 كم²',
+                currency: 'درهم إماراتي',
+                language: 'العربية',
+                government: 'اتحاد فيدرالي',
+                independence: '1971',
+                highestPeak: 'جبل جيس (1,934 م)',
+                description: 'دولة حديثة ومركز عالمي للأعمال والسياحة',
+                flag: '🇦🇪',
+                x: 640,
+                y: 230
+            },
+            {
+                id: 'china',
+                name: 'الصين',
+                capital: 'بكين',
+                continent: 'asia',
+                continentAr: 'آسيا',
+                population: '1.4 مليار',
+                area: '9,596,961 كم²',
+                currency: 'يوان صيني',
+                language: 'الصينية',
+                government: 'جمهورية شعبية',
+                independence: '1949',
+                highestPeak: 'إيفرست (8,849 م)',
+                description: 'أكبر دولة من حيث عدد السكان وثاني أكبر اقتصاد عالمي',
+                flag: '🇨🇳',
+                x: 750,
+                y: 200
+            },
+            {
+                id: 'japan',
+                name: 'اليابان',
+                capital: 'طوكيو',
+                continent: 'asia',
+                continentAr: 'آسيا',
+                population: '125 مليون',
+                area: '377,975 كم²',
+                currency: 'ين ياباني',
+                language: 'اليابانية',
+                government: 'ملكية دستورية',
+                independence: '660 ق.م',
+                highestPeak: 'جبل فوجي (3,776 م)',
+                description: 'دولة التكنولوجيا المتقدمة والثقافة العريقة',
+                flag: '🇯🇵',
+                x: 830,
+                y: 195
+            },
+            {
+                id: 'india',
+                name: 'الهند',
+                capital: 'نيودلهي',
+                continent: 'asia',
+                continentAr: 'آسيا',
+                population: '1.4 مليار',
+                area: '3,287,263 كم²',
+                currency: 'روبية هندية',
+                language: 'الهندية والإنجليزية',
+                government: 'جمهورية فيدرالية',
+                independence: '1947',
+                highestPeak: 'كانغشينجونغا (8,586 م)',
+                description: 'ثاني أكبر دولة من حيث السكان وأكبر ديمقراطية في العالم',
+                flag: '🇮🇳',
+                x: 680,
+                y: 230
+            },
+            // أفريقيا
+            {
+                id: 'egypt',
+                name: 'مصر',
+                capital: 'القاهرة',
+                continent: 'africa',
+                continentAr: 'أفريقيا',
+                population: '104 مليون',
+                area: '1,002,450 كم²',
+                currency: 'جنيه مصري',
+                language: 'العربية',
+                government: 'جمهورية',
+                independence: '1922',
+                highestPeak: 'جبل كاترين (2,629 م)',
+                description: 'أم الدنيا وموطن الحضارة الفرعونية العريقة',
+                flag: '🇪🇬',
+                x: 520,
+                y: 210
+            },
+            {
+                id: 'south-africa',
+                name: 'جنوب أفريقيا',
+                capital: 'بريتوريا',
+                continent: 'africa',
+                continentAr: 'أفريقيا',
+                population: '60 مليون',
+                area: '1,221,037 كم²',
+                currency: 'راند',
+                language: 'الإنجليزية والأفريقانية',
+                government: 'جمهورية',
+                independence: '1910',
+                highestPeak: 'ماخيكا (3,482 م)',
+                description: 'دولة متعددة الثقافات في أقصى جنوب القارة الأفريقية',
+                flag: '🇿🇦',
+                x: 520,
+                y: 360
+            },
+            {
+                id: 'nigeria',
+                name: 'نيجيريا',
+                capital: 'أبوجا',
+                continent: 'africa',
+                continentAr: '��فريقيا',
+                population: '218 مليون',
+                area: '923,768 كم²',
+                currency: 'نايرا',
+                language: 'الإنجليزية',
+                government: 'جمهورية فيدرالية',
+                independence: '1960',
+                highestPeak: 'تشابال وادي (2,419 م)',
+                description: 'أكبر دولة أفريقية من حيث عدد السكان',
+                flag: '🇳🇬',
+                x: 470,
+                y: 260
+            },
+            // أوروبا
+            {
+                id: 'france',
+                name: 'فرنسا',
+                capital: 'باريس',
+                continent: 'europe',
+                continentAr: 'أوروبا',
+                population: '67 مليون',
+                area: '643,801 كم²',
+                currency: 'يورو',
+                language: 'الفرنسية',
+                government: 'جمهورية',
+                independence: '843',
+                highestPeak: 'مون بلان (4,808 م)',
+                description: 'مركز الثقافة والفن والموضة الأوروبية',
+                flag: '🇫🇷',
+                x: 460,
+                y: 120
+            },
+            {
+                id: 'germany',
+                name: 'ألمانيا',
+                capital: 'برلين',
+                continent: 'europe',
+                continentAr: 'أوروبا',
+                population: '83 مليون',
+                area: '357,022 كم²',
+                currency: 'يورو',
+                language: 'الألمانية',
+                government: 'جمهورية فيدرالية',
+                independence: '1871',
+                highestPeak: 'زوغشبيتسه (2,962 م)',
+                description: 'أكبر اقتصاد في أوروبا ومركز صناعي عالمي',
+                flag: '🇩🇪',
+                x: 490,
+                y: 110
+            },
+            {
+                id: 'uk',
+                name: 'بريطانيا',
+                capital: 'لندن',
+                continent: 'europe',
+                continentAr: 'أوروبا',
+                population: '67 مليون',
+                area: '242,495 كم²',
+                currency: 'جنيه إسترليني',
+                language: 'الإنجليزية',
+                government: 'ملكية دستورية',
+                independence: '927',
+                highestPeak: 'بن نيفيس (1,345 م)',
+                description: 'مملكة تاريخية ومركز مالي عالمي',
+                flag: '🇬���',
+                x: 445,
+                y: 105
+            },
+            // أمريكا الشمالية
+            {
+                id: 'usa',
+                name: 'أمريكا',
+                capital: 'واشنطن',
+                continent: 'north-america',
+                continentAr: 'أمريكا الشمالية',
+                population: '331 مليون',
+                area: '9,833,520 كم²',
+                currency: 'دولار أمريكي',
+                language: 'الإنجليزية',
+                government: 'جمهورية فيدرالية',
+                independence: '1776',
+                highestPeak: 'دينالي (6,190 م)',
+                description: 'أكبر قوة اقتصادية وعسكرية في العالم',
+                flag: '🇺🇸',
+                x: 180,
+                y: 170
+            },
+            {
+                id: 'canada',
+                name: 'كندا',
+                capital: 'أوتاوا',
+                continent: 'north-america',
+                continentAr: 'أمريكا الشمالية',
+                population: '38 مليون',
+                area: '9,984,670 كم²',
+                currency: 'دولار كندي',
+                language: 'الإنجليزية والفرنسية',
+                government: 'ملكية دستورية',
+                independence: '1867',
+                highestPeak: 'جبل لوغان (5,959 م)',
+                description: 'ثاني أكبر دولة في العالم من حيث المساحة',
+                flag: '🇨🇦',
+                x: 160,
+                y: 100
+            },
+            {
+                id: 'mexico',
+                name: 'المكسيك',
+                capital: 'مكسيكو سيتي',
+                continent: 'north-america',
+                continentAr: 'أمريكا الشمالية',
+                population: '128 مليون',
+                area: '1,964,375 كم²',
+                currency: 'بيزو مكسيكي',
+                language: 'الإسبانية',
+                government: 'جمهورية فيدرالية',
+                independence: '1810',
+                highestPeak: 'بيكو دي أوريزابا (5,636 م)',
+                description: 'دولة غنية بالتراث الثقافي والحضارات القديمة',
+                flag: '🇲🇽',
+                x: 150,
+                y: 230
+            },
+            // أمريكا الجنوبية
+            {
+                id: 'brazil',
+                name: 'البرازيل',
+                capital: 'برازيليا',
+                continent: 'south-america',
+                continentAr: 'أمريكا الجنوبية',
+                population: '213 مليون',
+                area: '8,515,767 كم²',
+                currency: 'ريال برازيلي',
+                language: 'البرتغالية',
+                government: 'جمهورية فيد��الية',
+                independence: '1822',
+                highestPeak: 'بيكو دا نيبلينا (2,994 م)',
+                description: 'أكبر دولة في أمريكا الجنوبية وموطن غابات الأمازون',
+                flag: '🇧🇷',
+                x: 240,
+                y: 320
+            },
+            {
+                id: 'argentina',
+                name: 'الأرجنتين',
+                capital: 'بوينس آيرس',
+                continent: 'south-america',
+                continentAr: 'أمريكا الجنوبية',
+                population: '45 مليون',
+                area: '2,780,400 كم²',
+                currency: 'بيزو أرجنتيني',
+                language: 'الإسبانية',
+                government: 'جمهورية فيدرالية',
+                independence: '1816',
+                highestPeak: '��كونكاغوا (6,961 م)',
+                description: 'دولة التانغو وكرة القدم في أقصى جنوب أمريكا الجنوبية',
+                flag: '🇦🇷',
+                x: 230,
+                y: 380
+            },
+            // أوقيانوسيا
+            {
+                id: 'australia',
+                name: 'أستراليا',
+                capital: 'كانبرا',
+                continent: 'oceania',
+                continentAr: 'أوقيانوسيا',
+                population: '26 مليون',
+                area: '7,692,024 كم²',
+                currency: 'دولار أسترالي',
+                language: 'الإنجليزية',
+                government: 'ملكية دست��رية',
+                independence: '1901',
+                highestPeak: 'جبل كوسيوسكو (2,228 م)',
+                description: 'أكبر دولة في أوقيانوسيا وسادس أكبر دولة في العالم',
+                flag: '🇦🇺',
+                x: 850,
+                y: 370
+            }
+        ];
+
+        let filteredCountries = [...countries];
+        let selectedCountry = null;
+
+        function renderCountries() {
+            const svg = document.getElementById('world-map');
+            const existingMarkers = svg.querySelectorAll('.country-marker');
+            existingMarkers.forEach(marker => marker.remove());
+
+            filteredCountries.forEach((country, index) => {
+                const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                g.setAttribute('class', 'country-marker');
+                g.setAttribute('data-country-id', country.id);
+                g.style.animationDelay = `${index * 0.05}s`;
+                
+                // Pin marker
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', country.x);
+                circle.setAttribute('cy', country.y);
+                circle.setAttribute('r', '8');
+                circle.setAttribute('fill', '#ffd700');
+                circle.setAttribute('stroke', '#ffffff');
+                circle.setAttribute('stroke-width', '2');
+                
+                // Pulse circle
+                const pulseCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                pulseCircle.setAttribute('cx', country.x);
+                pulseCircle.setAttribute('cy', country.y);
+                pulseCircle.setAttribute('r', '12');
+                pulseCircle.setAttribute('fill', 'none');
+                pulseCircle.setAttribute('stroke', '#ffd700');
+                pulseCircle.setAttribute('stroke-width', '1.5');
+                pulseCircle.setAttribute('opacity', '0.5');
+                
+                g.appendChild(pulseCircle);
+                g.appendChild(circle);
+                
+                g.addEventListener('click', () => selectCountry(country));
+                
+                svg.appendChild(g);
+            });
+        }
+
+        function selectCountry(country) {
+            selectedCountry = country;
+            
+            const markers = document.querySelectorAll('.country-marker');
+            markers.forEach(m => m.classList.remove('active'));
+            
+            const selectedMarker = document.querySelector(`[data-country-id="${country.id}"]`);
+            if (selectedMarker) {
+                selectedMarker.classList.add('active');
+            }
+            
+            const infoPanel = document.getElementById('info-panel');
+            const countryInfo = document.getElementById('country-info');
+            
+            countryInfo.innerHTML = `
+                <div class="flag-emoji">${country.flag}</div>
+                <h2 class="text-4xl font-bold text-center mb-8" style="color: ${defaultConfig.text_color}">${country.name}</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">🏛️ العاصمة</div>
+                        <div class="font-bold text-xl">${country.capital}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">🌍 القارة</div>
+                        <div class="font-bold text-xl">${country.continentAr}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">👥 عدد السكان</div>
+                        <div class="font-bold text-xl">${country.population}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">📏 المساحة</div>
+                        <div class="font-bold text-xl">${country.area}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">💰 العملة</div>
+                        <div class="font-bold text-xl">${country.currency}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">🗣️ اللغة</div>
+                        <div class="font-bold text-xl">${country.language}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">🏛️ نظام الحكم</div>
+                        <div class="font-bold text-xl">${country.government}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">📅 الاستقلال</div>
+                        <div class="font-bold text-xl">${country.independence}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="text-sm opacity-70 mb-2">⛰️ أعلى قمة</div>
+                        <div class="font-bold text-xl">${country.highestPeak}</div>
+                    </div>
+                </div>
+                <div class="mt-8 p-6 rounded-xl" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.15) 100%);">
+                    <p class="text-lg leading-relaxed font-medium" style="color: ${defaultConfig.text_color}">${country.description}</p>
+                </div>
+            `;
+            
+            infoPanel.classList.remove('hidden');
+            infoPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function filterAndSort() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const continentFilter = document.getElementById('continent-filter').value;
+            const sortBy = document.getElementById('sort-select').value;
+            
+            filteredCountries = countries.filter(country => {
+                const matchesSearch = country.name.includes(searchTerm) || 
+                                    country.capital.includes(searchTerm);
+                const matchesContinent = continentFilter === 'all' || 
+                                       country.continent === continentFilter;
+                return matchesSearch && matchesContinent;
+            });
+            
+            if (sortBy === 'name') {
+                filteredCountries.sort((a, b) => a.name.localeCompare(b.name, 'ar'));
+            } else if (sortBy === 'population') {
+                filteredCountries.sort((a, b) => {
+                    const popA = parseFloat(a.population.replace(/[^\d.]/g, ''));
+                    const popB = parseFloat(b.population.replace(/[^\d.]/g, ''));
+                    return popB - popA;
+                });
+            } else if (sortBy === 'area') {
+                filteredCountries.sort((a, b) => {
+                    const areaA = parseInt(a.area.replace(/[^\d]/g, ''));
+                    const areaB = parseInt(b.area.replace(/[^\d]/g, ''));
+                    return areaB - areaA;
+                });
+            }
+            
+            renderCountries();
+        }
+
+        document.getElementById('search-input').addEventListener('input', filterAndSort);
+        document.getElementById('continent-filter').addEventListener('change', filterAndSort);
+        document.getElementById('sort-select').addEventListener('change', filterAndSort);
+
+        async function onConfigChange(config) {
+            const mainTitle = document.getElementById('main-title');
+            const subtitle = document.getElementById('subtitle');
+            const searchInput = document.getElementById('search-input');
+            
+            mainTitle.textContent = config.main_title || defaultConfig.main_title;
+            subtitle.textContent = config.subtitle || defaultConfig.subtitle;
+            searchInput.placeholder = config.search_placeholder || defaultConfig.search_placeholder;
+            
+            const bgColor = config.background_color || defaultConfig.background_color;
+            document.body.style.background = `linear-gradient(135deg, ${bgColor} 0%, #1a2744 50%, #0f1f3d 100%)`;
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["main_title", config.main_title || defaultConfig.main_title],
+                    ["subtitle", config.subtitle || defaultConfig.subtitle],
+                    ["search_placeholder", config.search_placeholder || defaultConfig.search_placeholder]
+                ])
+            });
+        }
+
+        renderCountries();
+        selectCountry(countries[0]);
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b1a77432056f9fe',t:'MTc2NjM1MjQ3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

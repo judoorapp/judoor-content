@@ -1,0 +1,47 @@
+{
+  "gameCategories": [
+    {"id": "linguistic", "title": "المكتسبات اللغوية والقرائية", "description": "ألعاب لتعلم الحروف، المفردات، ومهارات القراءة المبكرة.", "icon": "MenuBook", "ageRange": "3-7 سنوات", "iconColor": "#1E88E5", "iconBackgroundColor": "#E3F2FD"},
+    {"id": "math", "title": "الحساب والمهارات العددية", "description": "ألعاب العد، فهم الكميات، والعمليات الحسابية البسيطة.", "icon": "Calculate", "ageRange": "3-9 سنوات", "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "spatial", "title": "الإدراك المكاني وحل المشكلات", "description": "ألعاب التركيب، الألغاز، والتفكير المكاني.", "icon": "Extension", "ageRange": "2-10 سنوات", "iconColor": "#7CB342", "iconBackgroundColor": "#F1F8E9"},
+    {"id": "computational", "title": "التفكير الحاسوبي والبرمجة", "description": "مفاهيم التسلسل، التكرار، والشروط بطريقة مبسطة.", "icon": "DataObject", "ageRange": "4+ سنوات", "iconColor": "#5E35B1", "iconBackgroundColor": "#EDE7F6"},
+    {"id": "stem", "title": "العلوم والتجارب المصغّرة", "description": "استكشاف مبادئ العلوم بطريقة تجريبية وآمنة.", "icon": "Science", "ageRange": "5-12 سنة", "iconColor": "#E53935", "iconBackgroundColor": "#FFEBEE"},
+    {"id": "motor_social", "title": "مهارات حركية، اجتماعية، وإبداعية", "description": "تنمية المهارات الدقيقة، التعبير الفني، والمهارات الاجتماعية.", "icon": "SportsHandball", "ageRange": "1.5-12 سنة", "iconColor": "#8E24AA", "iconBackgroundColor": "#F3E5F5"}
+  ],
+
+
+  "activities": [
+
+    {"id": "letter_game", "gameId": "template_letter_choice", "title": "لعبة الحروف", "categoryId": "linguistic", "icon": "Spellcheck", "skillTags": ["letter_recognition", "phonetics"], "iconColor": "#1E88E5", "iconBackgroundColor": "#E3F2FD"},
+    {"id": "interactive_cards_game", "gameId": "template_interactive_cards", "title": "بطاقات الحروف", "categoryId": "linguistic", "icon": "Style", "skillTags": ["spelling", "vocabulary"], "iconColor": "#1E88E5", "iconBackgroundColor": "#E3F2FD"},
+    {"id": "sound_discrimination_game", "gameId": "template_sound_discrimination", "title": "تمييز الأصوات", "categoryId": "linguistic", "icon": "Hearing", "skillTags": ["auditory_discrimination", "phonemic_awareness"], "iconColor": "#1E88E5", "iconBackgroundColor": "#E3F2FD"},
+    {"id": "drag_build_game", "gameId": "template_drag_build", "title": "بناء الكلمات", "categoryId": "linguistic", "icon": "Construction", "skillTags": ["spelling", "fine_motor_skills"], "iconColor": "#1E88E5", "iconBackgroundColor": "#E3F2FD"},
+
+
+    {"id": "learn_numbers", "gameId": "template_learn_numbers", "title": "تعلم الأرقام", "categoryId": "math", "icon": "LooksOne", "skillTags": ["number_recognition"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "count_and_choose", "gameId": "template_count_choose", "title": "عد واختر", "categoryId": "math", "icon": "TouchApp", "skillTags": ["counting", "quantity_comparison"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "number_recognition_activity", "gameId": "template_number_recognition", "title": "التعرف على الأرقام", "categoryId": "math", "icon": "LooksOne", "skillTags": ["number_recognition"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "counting_activity", "gameId": "template_counting", "title": "لعبة العد", "categoryId": "math", "icon": "TouchApp", "skillTags": ["counting"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "comparison_activity", "gameId": "template_comparison", "title": "لعبة المقارنة", "categoryId": "math", "icon": "CompareArrows", "skillTags": ["quantity_comparison"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "addition_activity", "gameId": "template_addition", "title": "لعبة الجمع", "categoryId": "math", "icon": "Add", "skillTags": ["addition"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "subtraction_activity", "gameId": "template_subtraction", "title": "لعبة الطرح", "categoryId": "math", "icon": "Remove", "skillTags": ["subtraction"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+    {"id": "pattern_completion_game", "gameId": "template_pattern_completion", "title": "إكمال الأنماط", "categoryId": "math", "icon": "Pattern", "skillTags": ["pattern_recognition", "logical_thinking"], "iconColor": "#F57C00", "iconBackgroundColor": "#FFF3E0"},
+
+
+    {"id": "shapes_and_colors_game", "gameId": "template_shapes_colors", "title": "مغامرة الأشكال", "categoryId": "spatial", "icon": "Palette", "skillTags": ["shape_recognition", "color_recognition"], "iconColor": "#7CB342", "iconBackgroundColor": "#F1F8E9"},
+    {"id": "fruit_sorting_game", "gameId": "template_sorting", "title": "تصنيف الفواكه", "categoryId": "spatial", "icon": "Eco", "skillTags": ["classification", "visual_discrimination"], "iconColor": "#7CB342", "iconBackgroundColor": "#F1F8E9"},
+    {"id": "memory_pairs_game", "gameId": "template_memory_pairs", "title": "لعبة الذاكرة", "categoryId": "spatial", "icon": "Psychology", "skillTags": ["working_memory", "attention"], "iconColor": "#7CB342", "iconBackgroundColor": "#F1F8E9"},
+    {"id": "spot_difference_game", "gameId": "template_spot_difference", "title": "ابحث عن الاختلاف", "categoryId": "spatial", "icon": "Search", "skillTags": ["visual_discrimination", "attention_to_detail"], "iconColor": "#7CB342", "iconBackgroundColor": "#F1F8E9"},
+    {"id": "web_shape_adventure", "gameId": "template_webview_game", "title": "مغامرة الأشكال (ويب)", "categoryId": "spatial", "icon": "Palette", "skillTags": ["visual_discrimination", "spatial_reasoning"], "difficulty": 2, "iconColor": "#7CB342", "iconBackgroundColor": "#F1F8E9"},
+
+
+    {"id": "sequence_ordering_game", "gameId": "template_sequence_ordering", "title": "ترتيب وتسلسل", "categoryId": "computational", "icon": "SortByAlpha", "skillTags": ["logical_thinking", "sequencing"], "iconColor": "#5E35B1", "iconBackgroundColor": "#EDE7F6"},
+    {"id": "web_roboot_lab", "gameId": "template_webview_game", "title": "مختبر الروبوت", "categoryId": "computational", "icon": "SmartToy", "skillTags": ["problem_solving", "logical_thinking"], "difficulty": 2, "url": "file:///android_asset/roboot.html", "iconColor": "#5E35B1", "iconBackgroundColor": "#EDE7F6"},
+
+
+    {"id": "web_lab_child", "gameId": "template_webview_game", "title": "مختبر الطفل", "categoryId": "stem", "icon": "Biotech", "skillTags": ["scientific_observation", "problem_solving"], "difficulty": 1, "url": "file:///android_asset/lab_child.html", "iconColor": "#E53935", "iconBackgroundColor": "#FFEBEE"},
+
+
+    {"id": "tracing_letters_game", "gameId": "template_tracing_letters", "title": "تتبع الحروف", "categoryId": "motor_social", "icon": "Gesture", "skillTags": ["fine_motor_skills", "letter_formation"], "iconColor": "#8E24AA", "iconBackgroundColor": "#F3E5F5"},
+    {"id": "emotion_recognition_game", "gameId": "template_emotion_recognition", "title": "التعرف على المشاعر", "categoryId": "motor_social", "icon": "SentimentSatisfied", "skillTags": ["social_emotional", "emotion_recognition"], "iconColor": "#8E24AA", "iconBackgroundColor": "#F3E5F5"}
+  ]
+}
